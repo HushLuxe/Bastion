@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200" role="img" aria-label="Bastion — savings with strength">
+  <rect x="10" y="10" width="180" height="180" fill="#EDEAE3"/>
+  <rect x="18" y="18" width="164" height="164" fill="none" stroke="#15191E" stroke-opacity="0.5" stroke-width="2"/>
+  <path d="M60 148v-52a40 40 0 0 1 80 0v52" fill="none" stroke="#15191E" stroke-width="7"/>
+  <path d="M50 148h100" stroke="#1F5F52" stroke-width="8" stroke-linecap="round"/>
+  <path d="M100 148v-24a14 14 0 0 1 28 0v24" fill="none" stroke="#15191E" stroke-width="5"/>
+  <text x="224" y="112" font-family="Instrument Serif, Georgia, serif" font-size="76" font-weight="400" fill="#15191E">Bastion</text>
+  <text x="226" y="152" font-family="IBM Plex Mono, monospace" font-size="19" fill="#5C6672">FORTIFY YOUR MUSD</text>
+</svg>
