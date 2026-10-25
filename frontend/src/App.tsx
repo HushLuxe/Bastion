@@ -6,7 +6,7 @@ import { Header } from './components/Header'
 import { Achievements } from './pages/Achievements'
 import { Dashboard } from './pages/Dashboard'
 import { Landing } from './pages/Landing'
-import { KeepIcon } from './components/icons'
+import { Mark } from './components/Header'
 
 export default function App() {
   return (
@@ -20,13 +20,13 @@ export default function App() {
           <Route path="/achievements" element={<Achievements />} />
         </Routes>
       </main>
-      <footer className="border-t border-bastion-line-soft px-5 py-8">
-        <div className="shell flex flex-col items-center justify-between gap-3 text-xs text-bastion-muted sm:flex-row">
-          <span className="flex items-center gap-2">
-            <KeepIcon className="h-3.5 w-3.5 text-bastion-amber" />
+      <footer className="rule-t mt-10">
+        <div className="shell flex flex-col items-center justify-between gap-3 py-8 sm:flex-row">
+          <span className="flex items-center gap-2.5 text-xs text-ink-soft">
+            <Mark className="h-5 w-5" />
             Bastion — savings with strength. Settled in MUSD on Mezo Testnet.
           </span>
-          <span className="flex items-center gap-2">
+          <span className="figure text-[11px] tracking-[0.14em] text-ink-faint uppercase">
             Non-custodial · on-chain badges · gas in BTC
           </span>
         </div>
