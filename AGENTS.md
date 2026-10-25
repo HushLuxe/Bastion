@@ -18,7 +18,7 @@ collectible on-chain NFT artwork.
 ## Workspace
 
 - **Repo root:** `/home/maryjane/Desktop/workspace/job/HushLuxe/Bastion`
-- **Git:** initialised on `main`, remote `origin` → `git@github.com:Ryjen1/Bastion.git`
+- **Git:** initialised on `main`, remote `origin` → `git@github.com:HushLuxe/Bastion.git`
 - **Commit identity (repo-local):** `Maryjane Okafor <114498519+Ryjen1@users.noreply.github.com>`
   so commits link to the GitHub account `Ryjen1`
 - **Note:** the parent folder `HushLuxe/` contains unrelated projects — keep this repo
@@ -81,7 +81,7 @@ from the Annex deployer, and use that key for Bastion only.
    achievement gallery
 4. **Deploy frontend** to Vercel, verify against live contracts
 5. **Assets + pitch deck + demo video + submission copy**
-6. **Public repo** `Ryjen1/Bastion` + push
+6. **Public repo** `HushLuxe/Bastion` + push
 
 ---
 

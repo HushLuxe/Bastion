@@ -9,26 +9,30 @@ milestone mints a collectible badge whose artwork is generated on-chain.
 - **Chain:** Mezo Testnet (`31611`), gas paid in BTC
 - **Asset:** canonical MUSD (`0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503`, 18 decimals)
 - **Live app:** https://bastion-two-hazel.vercel.app
+- **Demo video:** https://youtu.be/19a2HcCtzNk?si=Cn69Vn6QAkwSRpUT
 - **Track:** Track 1 – DeFi
 
 ---
 
 ## The difference
 
-A yield vault gives you a balance and a rate. Bastion gives you a balance **and a record**:
-six milestones, each unlocking an on-chain badge that shows how far you have come.
+A yield vault gives you a balance and a rate. Bastion gives you a balance **and a verifiable on-chain record**:
+six milestones, each unlocking an on-chain collectible badge that marks your savings journey.
 
-| Milestone | Condition |
-|-----------|-----------|
-| First Deposit | first MUSD deposited |
-| Saved 100 MUSD | lifetime deposits ≥ 100 MUSD |
-| Saved 500 MUSD | lifetime deposits ≥ 500 MUSD |
-| Held for 7 Days | position held ≥ 7 days |
-| Held for 30 Days | position held ≥ 30 days |
-| Earned 10 MUSD in Yield | lifetime yield paid ≥ 10 MUSD |
+| Milestone | Condition | Reward |
+|-----------|-----------|--------|
+| **First Deposit** | First MUSD deposited | Minted immediately upon first deposit |
+| **Saved 100 MUSD** | Lifetime deposits ≥ 100 MUSD | Unlocks Tier II Ingot Linework Badge |
+| **Saved 500 MUSD** | Lifetime deposits ≥ 500 MUSD | Unlocks Tier III Fortress Keep Badge |
+| **Held for 7 Days** | Position held ≥ 7 days | Unlocks Hourglass Badge |
+| **Held for 30 Days** | Position held ≥ 30 days | Unlocks Monthly Bastion Badge |
+| **Earned 10 MUSD in Yield** | Lifetime yield paid ≥ 10 MUSD | Unlocks Sprouting Yield Coin Badge |
 
-Badges are ERC-721 tokens minted by the vault. `tokenURI` returns an SVG **data URI**
-generated inside the contract, so the artwork needs no hosting, no IPFS and no CDN.
+### On-chain SVG artwork
+Badges are true **ERC-721 tokens (`BSTN`)** minted by the vault. `tokenURI` returns a self-contained SVG **data URI** generated directly in Solidity inside `BastionAchievements.sol`. 
+- **Zero off-chain dependencies:** No IPFS, no central CDN, and no risk of broken image links.
+- **Architectural blueprint aesthetic:** Each badge is rendered as a precision technical elevation drawing with milestone-specific geometric linework and emerald/parchment styling.
+- **Immediate minting:** The vault evaluates milestone conditions after state changes and mints newly earned badges to the user in the same transaction. Users can inspect their unlocked collection and track live progress to locked milestones in the app's **Achievements Gallery** (`/achievements`).
 
 ---
 
@@ -58,11 +62,11 @@ holder per type.
 
 ## Contracts
 
-| Contract | Address (Mezo Testnet) |
-|----------|------------------------|
-| `BastionVault` | `0x1f01c11bc7372b4a42bf7a1d64d3862060b1218e` |
-| `BastionReceipt` (ERC-20 `bMUSD`) | `0xd3f555153F835C168E5595d311F6AdC204B403cd` |
-| `BastionAchievements` (ERC-721) | `0x2eaa9e647194b882c12030C86DdaABDE79e75C2b` |
+| Contract | Address (Mezo Testnet) | Explorer |
+|----------|------------------------|----------|
+| `BastionVault` | `0xcdf6add60726fb123c26e668e6d4eef06c2c167b` | [View on Explorer](https://explorer.test.mezo.org/address/0xcdf6add60726fb123c26e668e6d4eef06c2c167b) |
+| `BastionReceipt` (ERC-20 `bMUSD`) | `0x52a6ebf2f1507b27b88654fc1d933a59607ecd24` | [View on Explorer](https://explorer.test.mezo.org/address/0x52a6ebf2f1507b27b88654fc1d933a59607ecd24) |
+| `BastionAchievements` (ERC-721 `BSTN`) | `0x767dcd140217501e05e72d72de5c4339b76c1009` | [View on Explorer](https://explorer.test.mezo.org/address/0x767dcd140217501e05e72d72de5c4339b76c1009) |
 
 The vault deploys its own receipt token and achievement ledger, so the whole protocol comes
 up in one transaction and the trust direction is always vault → helpers.

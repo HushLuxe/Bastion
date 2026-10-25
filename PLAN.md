@@ -19,14 +19,14 @@ yield into a progress-driven experience.
 
 | Goal | Status |
 |------|--------|
-| Contracts deployed on Mezo Testnet | ⏳ |
-| Deposit and withdraw MUSD | ⏳ |
-| Yield accrual (simplified / controlled demo rate) | ⏳ |
-| NFT achievement system (ERC-721, milestones) | 🟡 contracts written, vault wiring pending |
-| Clean, polished dark frontend with progress + gallery | ⏳ |
-| End-to-end demo video | ⏳ |
-| Clean public GitHub repository | 🟡 repo scaffolded |
-| Short pitch deck highlighting the gamification difference | ⏳ |
+| Contracts deployed on Mezo Testnet | ✅ live at `0xcdf6add60726fb123c26e668e6d4eef06c2c167b` |
+| Deposit and withdraw MUSD | ✅ verified on testnet |
+| Yield accrual (simplified / controlled demo rate) | ✅ active & verified |
+| NFT achievement system (ERC-721, milestones) | ✅ 100% on-chain SVG artwork in Solidity |
+| Clean, polished architectural frontend with progress + gallery | ✅ live on Vercel |
+| End-to-end demo video | ✅ recorded & placed |
+| Clean public GitHub repository | ✅ scaffolded & configured |
+| Short pitch deck highlighting the gamification difference | ✅ completed (8 slides) |
 
 ---
 
