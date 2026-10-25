@@ -1,208 +1,196 @@
 // SPDX-License-Identifier: MIT
 import { Link } from 'react-router-dom'
 
-import { BadgeCard } from '../components/BadgeCard'
-import { ArrowUpRight, ClockIcon, CoinIcon, KeepIcon, TrophyIcon } from '../components/icons'
+import { BadgeThumb } from '../components/BadgeThumb'
+import { Mark } from '../components/Header'
 import { MILESTONES } from '../lib/contracts'
 
-const STEPS = [
-  {
-    icon: CoinIcon,
-    title: 'Deposit MUSD',
-    body: 'Your MUSD goes straight into the Bastion vault and you receive bMUSD receipt shares, 1:1, with no lock-up.',
-  },
-  {
-    icon: ClockIcon,
-    title: 'Earn yield',
-    body: 'Yield accrues every second on your position. The rate is set by the vault owner and backed by MUSD the vault already holds.',
-  },
-  {
-    icon: TrophyIcon,
-    title: 'Unlock badges',
-    body: 'Cross a milestone and Bastion mints an achievement badge — collectible, on-chain, and rendered straight from the contract.',
-  },
+const SPEC: [string, string][] = [
+  ['Vault', 'BastionVault · ERC-20 receipt'],
+  ['Asset', 'MUSD — canonical, Mezo Testnet'],
+  ['Chain', 'Mezo · 31611 · gas in BTC'],
+  ['Yield', 'Reward index, paid from buffer'],
+  ['Badges', 'ERC-721 · SVG drawn on-chain'],
+  ['Owner', 'Rate, buffer, pause — nothing else'],
+]
+
+const DIFFERENCE: [string, string, string][] = [
+  ['What you get back', 'A number', 'A number and a record'],
+  ['What marks progress', 'Nothing', 'Six on-chain badges'],
+  ['What you can keep', 'The balance', 'The balance and the badges'],
+  ['How it is shown', 'A rate', 'A ledger you can read'],
 ]
 
 export function Landing() {
   return (
     <div>
-      <section className="relative overflow-hidden">
-        <div className="torch-glow absolute inset-x-0 top-0 h-[520px]" />
+      <section className="shell grid gap-14 border-b border-ink/12 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-28">
+        <div className="animate-fade-up">
+          <div className="mb-8 inline-flex items-center gap-3 border border-ink/20 px-3 py-1.5">
+            <span className="figure text-[10px] tracking-[0.2em] text-verdigris uppercase">
+              Mezo Buildathon · Wave 1
+            </span>
+          </div>
 
-        <div className="shell relative pt-20 pb-16 sm:pt-28 sm:pb-24">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="animate-fade-up">
-              <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-bastion-amber/30 bg-bastion-amber/10 px-3.5 py-1.5 text-[11px] font-medium tracking-[0.18em] text-bastion-amber uppercase">
-                <span className="h-1.5 w-1.5 rounded-full bg-bastion-amber" />
-                Live on Mezo Testnet
-              </span>
+          <h1 className="font-display text-[clamp(2.9rem,7vw,5.2rem)] leading-[0.95] tracking-[-0.02em] text-ink">
+            Fortify your MUSD.
+            <br />
+            <em className="font-normal italic text-verdigris">Earn the badges.</em>
+          </h1>
 
-              <h1 className="font-display text-4xl leading-[1.02] font-bold tracking-[-0.035em] text-bastion-ink sm:text-6xl">
-                Fortify your MUSD.
-                <br />
-                <span className="text-amber-gradient">Earn the badges.</span>
-              </h1>
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft">
+            A savings vault for Bitcoin that remembers what you did. Deposit MUSD, earn yield
+            every second, and collect an achievement at every milestone — each one minted by the
+            contract, with its artwork drawn on-chain.
+          </p>
 
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-bastion-muted sm:text-lg">
-                Bastion turns saving into something you can see. Deposit MUSD, earn yield every
-                second, and unlock achievement badges that mark every milestone you pass.
-              </p>
+          <div className="mt-10 flex flex-wrap items-center gap-6">
+            <Link to="/dashboard" className="btn-ink px-6 py-3 text-sm">
+              Open the vault
+            </Link>
+            <Link to="/achievements" className="link-underline text-sm text-ink">
+              See the six milestones
+            </Link>
+          </div>
+        </div>
 
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Link
-                  to="/dashboard"
-                  className="btn-amber btn-amber-hover inline-flex items-center gap-2 px-6 py-3.5 text-[15px]"
-                >
-                  Open your Bastion
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/achievements"
-                  className="btn-stone inline-flex items-center gap-2 px-6 py-3.5 text-[15px]"
-                >
-                  See the achievements
-                </Link>
+        {/* the specification sheet */}
+        <div className="animate-fade-up sheet self-start" style={{ animationDelay: '120ms' }}>
+          <div className="rule-b flex items-center justify-between px-5 py-3">
+            <span className="eyebrow">Specification</span>
+            <Mark className="h-5 w-5" />
+          </div>
+          <dl>
+            {SPEC.map(([term, value]) => (
+              <div key={term} className="rule-b grid grid-cols-[7rem_1fr] gap-4 px-5 py-3 last:border-b-0">
+                <dt className="eyebrow">{term}</dt>
+                <dd className="figure text-[13px] text-ink">{value}</dd>
               </div>
-
-              <div className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-bastion-line-soft pt-7">
-                <Metric value="6" label="Milestones" />
-                <Metric value="100%" label="On-chain badges" />
-                <Metric value="1:1" label="Receipt shares" />
-              </div>
-            </div>
-
-            {/* the gate */}
-            <div className="animate-rise relative mx-auto w-full max-w-md">
-              <div className="arch relative overflow-hidden border border-bastion-line bg-bastion-stone p-8 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.95)]">
-                <div className="torch-glow absolute inset-x-0 top-0 h-40" />
-                <div className="relative">
-                  <div className="mb-6 flex items-center gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-bastion-amber/15 text-bastion-amber ring-1 ring-bastion-amber/30">
-                      <KeepIcon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="font-display text-sm font-semibold">Your Bastion</p>
-                      <p className="text-xs text-bastion-muted">MUSD vault · Mezo Testnet</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="rounded-xl border border-bastion-line-soft bg-bastion-bg-2 px-4 py-3">
-                      <p className="label-caps">Deposited</p>
-                      <p className="font-mono mt-1 text-2xl font-semibold tabular-nums">120.00 MUSD</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="rounded-xl border border-bastion-line-soft bg-bastion-bg-2 px-4 py-3">
-                        <p className="label-caps">Yield</p>
-                        <p className="font-mono mt-1 text-sm font-medium text-bastion-amber tabular-nums">
-                          +0.0432 MUSD
-                        </p>
-                      </div>
-                      <div className="rounded-xl border border-bastion-line-soft bg-bastion-bg-2 px-4 py-3">
-                        <p className="label-caps">Badges</p>
-                        <p className="font-mono mt-1 text-sm font-medium tabular-nums">2 / 6</p>
-                      </div>
-                    </div>
-                    <div className="space-y-2 pt-2">
-                      <Progress label="First Deposit" value={100} done />
-                      <Progress label="Saved 100 MUSD" value={100} done />
-                      <Progress label="Saved 500 MUSD" value={24} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
+          </dl>
+          <div className="rule-t flex items-center justify-between px-5 py-3">
+            <span className="figure text-[11px] text-ink-faint">bastion-two-hazel.vercel.app</span>
+            <span className="figure text-[11px] text-verdigris">live on testnet</span>
           </div>
         </div>
       </section>
 
-      <section className="shell py-20 sm:py-28">
-        <div className="max-w-2xl">
-          <span className="label-caps">How it works</span>
-          <h2 className="font-display mt-4 text-3xl leading-tight font-bold tracking-[-0.03em] sm:text-5xl">
-            A vault with a <span className="text-amber-gradient">progress system</span>
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-bastion-muted">
-            A plain vault gives you a balance. Bastion gives you a balance and a record of how far
-            you have come — every milestone is a badge you can keep.
-          </p>
-        </div>
+      <section className="shell py-20 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <span className="eyebrow">The difference</span>
+            <h2 className="font-display mt-4 text-4xl leading-[1.05] tracking-[-0.01em] lg:text-5xl">
+              A vault gives you a balance.
+              <br />
+              <em className="font-normal italic text-verdigris">Bastion gives you a record.</em>
+            </h2>
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-soft">
+              MUSD vaults today are cold: you deposit, a number drifts upward, and nothing marks
+              what you did. Bastion adds the layer a programmable stablecoin can have and a
+              plain vault cannot — a permanent, collectible trail of every milestone you pass.
+            </p>
+          </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {STEPS.map((step, index) => (
-            <div
-              key={step.title}
-              className="panel animate-fade-up p-7 transition-colors duration-300 hover:border-bastion-amber/30"
-              style={{ animationDelay: `${index * 90}ms` }}
-            >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-bastion-amber/12 text-bastion-amber ring-1 ring-bastion-amber/25">
-                <step.icon className="h-5 w-5" />
-              </span>
-              <h3 className="font-display mt-5 text-lg font-semibold">{step.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-bastion-muted">{step.body}</p>
+          <div className="sheet self-start">
+            <div className="rule-b grid grid-cols-[1fr_1fr_1fr] gap-4 px-6 py-3">
+              <span className="eyebrow">—</span>
+              <span className="eyebrow">A plain vault</span>
+              <span className="eyebrow text-verdigris">Bastion</span>
+            </div>
+            {DIFFERENCE.map(([label, plain, bastion]) => (
+              <div key={label} className="rule-b grid grid-cols-[1fr_1fr_1fr] gap-4 px-6 py-4 last:border-b-0">
+                <span className="text-sm text-ink-soft">{label}</span>
+                <span className="text-sm text-ink-faint">{plain}</span>
+                <span className="text-sm font-medium text-ink">{bastion}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-ink/12 bg-paper-2/60 py-20 lg:py-28">
+        <div className="shell">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <span className="eyebrow">Milestones</span>
+              <h2 className="font-display mt-4 text-4xl tracking-[-0.01em] lg:text-5xl">
+                Six of them, drawn like a plan.
+              </h2>
+            </div>
+            <Link to="/achievements" className="link-underline text-sm text-ink">
+              Open the index
+            </Link>
+          </div>
+
+          <div className="mt-12">
+            {MILESTONES.map((milestone, index) => (
+              <Link
+                key={milestone.id}
+                to="/achievements"
+                className="ledger-row group transition-colors hover:bg-paper-2/60"
+              >
+                <span className="figure text-xs text-ink-faint">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-base font-medium text-ink">{milestone.title}</span>
+                  <span className="mt-0.5 block text-sm text-ink-soft">{milestone.description}</span>
+                </span>
+                <BadgeThumb tokenId={0n} earned={false} size={44} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="shell py-20 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-3">
+          {[
+            {
+              n: '01',
+              t: 'Deposit',
+              b: 'Your MUSD goes into the vault and you receive bMUSD receipt shares, one for one. No lock-up, no minimum, no account.',
+            },
+            {
+              n: '02',
+              t: 'Accrue',
+              b: 'A reward index advances every second. Your yield is paid from MUSD the vault already holds, so a deposit is always fully backed.',
+            },
+            {
+              n: '03',
+              t: 'Unlock',
+              b: 'Cross a milestone and the vault mints you an ERC-721 badge. The artwork is generated inside the contract — it cannot be edited or taken down.',
+            },
+          ].map((step) => (
+            <div key={step.n} className="border-t border-ink/20 pt-6">
+              <span className="figure text-xs text-verdigris">{step.n}</span>
+              <h3 className="font-display mt-3 text-2xl">{step.t}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft">{step.b}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="shell pb-24">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+      {/* inverted closing block */}
+      <section className="sheet-ink">
+        <div className="shell flex flex-wrap items-center justify-between gap-8 py-16 lg:py-20">
           <div>
-            <span className="label-caps">Achievements</span>
-            <h2 className="font-display mt-4 text-3xl leading-tight font-bold tracking-[-0.03em] sm:text-5xl">
-              Six milestones. <span className="text-amber-gradient">One record.</span>
+            <span className="eyebrow text-paper/55">Live on Mezo Testnet</span>
+            <h2 className="font-display mt-3 text-4xl tracking-[-0.01em] lg:text-5xl">
+              Build your Bastion.
             </h2>
+            <p className="mt-4 max-w-md text-sm text-paper/60">
+              Deposit MUSD, watch the yield accrue, and take the first badge with you.
+            </p>
           </div>
-          <Link to="/achievements" className="btn-stone px-5 py-3 text-sm">
-            Open the gallery
+          <Link
+            to="/dashboard"
+            className="border border-paper/25 px-7 py-3.5 text-sm font-medium transition-colors hover:bg-paper hover:text-ink"
+          >
+            Open the vault
           </Link>
         </div>
-
-        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
-          {MILESTONES.map((milestone) => (
-            <div
-              key={milestone.id}
-              className="panel flex flex-col items-center p-4 text-center"
-            >
-              <BadgeCard
-                tokenId={0n}
-                earned={false}
-                title={milestone.short}
-                description={milestone.description}
-                size="sm"
-              />
-            </div>
-          ))}
-        </div>
       </section>
-    </div>
-  )
-}
-
-function Metric({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <p className="font-display text-2xl font-bold tracking-tight">{value}</p>
-      <p className="mt-1 text-[11px] tracking-[0.16em] text-bastion-muted uppercase">{label}</p>
-    </div>
-  )
-}
-
-function Progress({ label, value, done = false }: { label: string; value: number; done?: boolean }) {
-  return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between text-xs">
-        <span className={done ? 'text-bastion-ink' : 'text-bastion-muted'}>{label}</span>
-        <span className="font-mono text-[10px] text-bastion-muted">{value}%</span>
-      </div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-bastion-bg-2">
-        <div
-          className={`h-full rounded-full ${
-            done ? 'bg-gradient-to-r from-bastion-amber-deep to-bastion-amber-soft' : 'bg-bastion-stone-3'
-          }`}
-          style={{ width: `${value}%` }}
-        />
-      </div>
     </div>
   )
 }
