@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Bastion — fortify your MUSD, earn the badges. Gamified MUSD savings on Mezo.">
+  <defs>
+    <pattern id="ogGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#15191E" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#EDEAE3" />
+  <rect width="1200" height="630" fill="url(#ogGrid)" />
+
+  <g transform="translate(905 330)">
+    <rect x="-185" y="-225" width="370" height="450" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.5" stroke-width="2" />
+    <path d="M-80 160v-160a80 80 0 0 1 160 0v160" fill="none" stroke="#15191E" stroke-width="10" />
+    <path d="M-104 160h208" stroke="#1F5F52" stroke-width="12" stroke-linecap="round" />
+    <path d="M-30 160v-52a30 30 0 0 1 60 0v52" fill="none" stroke="#15191E" stroke-width="6" />
+    <path d="M-185 -225h46M-185 -225v46M185 -225h-46M185 -225v46M-185 225h46M-185 225v-46M185 225h-46M185 225v-46"
+      fill="none" stroke="#1F5F52" stroke-width="6" />
+  </g>
+
+  <g transform="translate(72 0)">
+    <g transform="translate(0 84)">
+      <rect width="46" height="46" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.4" />
+      <path d="M11 33V24a12 12 0 0 1 24 0v9" fill="none" stroke="#15191E" stroke-width="2.6" />
+      <path d="M9 33h28" stroke="#1F5F52" stroke-width="3.4" />
+      <text x="64" y="33" font-family="Instrument Serif, Georgia, serif" font-size="36" fill="#15191E">Bastion</text>
+    </g>
+
+    <text x="0" y="226" font-family="Instrument Serif, Georgia, serif" font-size="62" fill="#15191E">Fortify your MUSD.</text>
+    <text x="0" y="294" font-family="Instrument Serif, Georgia, serif" font-size="62" font-style="italic" fill="#1F5F52">Earn the badges.</text>
+
+    <text x="0" y="352" font-family="IBM Plex Sans, Arial, sans-serif" font-size="20" fill="#5C6672">Gamified MUSD savings on Mezo — deposit, earn yield every second,</text>
+    <text x="0" y="382" font-family="IBM Plex Sans, Arial, sans-serif" font-size="20" fill="#5C6672">and unlock six on-chain achievement milestones.</text>
+
+    <g transform="translate(0 418)">
+      <rect width="186" height="40" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
+      <text x="93" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="1.4" fill="#1F5F52">MEZO TESTNET</text>
+      <rect x="202" width="132" height="40" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
+      <text x="268" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="1.4" fill="#1F5F52">MUSD</text>
+      <rect x="350" width="178" height="40" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
+      <text x="439" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="1.4" fill="#1F5F52">ERC-721 BADGES</text>
+    </g>
+
+    <text x="0" y="540" font-family="IBM Plex Mono, monospace" font-size="15" fill="#5C6672">bastion-two-hazel.vercel.app · github.com/Ryjen1/Bastion</text>
+  </g>
+</svg>
