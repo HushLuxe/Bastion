@@ -145,7 +145,8 @@ contract BastionAchievements {
         return 0;
     }
 
-    /// @dev Builds the badge artwork. Each milestone gets its own glyph and accent.
+    /// @dev Builds the badge artwork: a technical drawing sheet with a medallion.
+    ///      Each milestone gets its own linework, drawn from the same primitives.
     function _badgeSvg(uint8 badgeId, string memory name_, string memory description_)
         internal
         pure
@@ -155,99 +156,114 @@ contract BastionAchievements {
         string memory glyph = _glyph(badgeId, accent);
         return string.concat(
             '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">',
-            '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">',
-            '<stop offset="0%" stop-color="#1B1F2A"/><stop offset="100%" stop-color="#0C0E14"/>',
-            "</linearGradient></defs>",
-            '<rect width="512" height="512" rx="96" fill="url(#g)"/>',
-            '<rect x="16" y="16" width="480" height="480" rx="80" fill="none" stroke="',
+            '<rect width="512" height="512" fill="#EDEAE3"/>',
+            '<g stroke="#15191E" stroke-opacity="0.08" stroke-width="1">',
+            '<path d="M0 64h512M0 128h512M0 192h512M0 256h512M0 320h512M0 384h512M0 448h512"/>',
+            '<path d="M64 0v512M128 0v512M192 0v512M256 0v512M320 0v512M384 0v512M448 0v512"/>',
+            "</g>",
+            '<rect x="24" y="24" width="464" height="464" fill="none" stroke="#15191E" stroke-opacity="0.55" stroke-width="2"/>',
+            '<path d="M24 96V24h72M488 96V24h-72M24 416v72h72M488 416v72h-72" fill="none" stroke="',
             accent,
-            '" stroke-opacity="0.55" stroke-width="4"/>',
+            '" stroke-width="5"/>',
+            '<circle cx="256" cy="244" r="146" fill="none" stroke="#15191E" stroke-opacity="0.25" stroke-width="2"/>',
+            '<circle cx="256" cy="244" r="160" fill="none" stroke="#15191E" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="6 10"/>',
             glyph,
-            '<text x="256" y="404" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="44" font-weight="700" fill="',
+            '<text x="48" y="70" font-family="Courier New, monospace" font-size="30" font-weight="700" fill="',
             accent,
             '">',
+            _badgeNumber(badgeId),
+            "</text>",
+            '<text x="256" y="424" text-anchor="middle" font-family="Georgia, serif" font-size="38" font-weight="700" fill="#15191E">',
             name_,
             "</text>",
-            '<text x="256" y="450" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#8A8FA3">',
+            '<text x="256" y="458" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#5C6672">',
             description_,
             "</text>",
             "</svg>"
         );
     }
 
-    function _accent(uint8 badgeId) internal pure returns (string memory) {
-        if (badgeId == 0) return "#F0A202";
-        if (badgeId == 1) return "#E8B44A";
-        if (badgeId == 2) return "#C97B0E";
-        if (badgeId == 3) return "#D9A441";
-        if (badgeId == 4) return "#B7791F";
-        return "#F5C542";
+    function _badgeNumber(uint8 badgeId) internal pure returns (string memory) {
+        if (badgeId == 0) return "01";
+        if (badgeId == 1) return "02";
+        if (badgeId == 2) return "03";
+        if (badgeId == 3) return "04";
+        if (badgeId == 4) return "05";
+        return "06";
     }
 
+    function _accent(uint8 badgeId) internal pure returns (string memory) {
+        if (badgeId == 0) return "#1F5F52";
+        if (badgeId == 1) return "#2A7A68";
+        if (badgeId == 2) return "#16463D";
+        if (badgeId == 3) return "#397F6E";
+        if (badgeId == 4) return "#123A33";
+        return "#2F8A76";
+    }
+
+    /// @dev Linework for each milestone, drawn as a technical elevation.
     function _glyph(uint8 badgeId, string memory accent) internal pure returns (string memory) {
         if (badgeId == 0) {
+            // an opened vault door
             return string.concat(
-                '<path d="M196 300V196a60 60 0 0 1 120 0v104" fill="none" stroke="',
+                '<path d="M180 300v-90a76 76 0 0 1 152 0v90" fill="none" stroke="#15191E" stroke-width="10"/>',
+                '<path d="M168 300h176" stroke="',
                 accent,
-                '" stroke-width="16" stroke-linecap="round"/>',
-                '<rect x="176" y="300" width="160" height="24" rx="12" fill="',
-                accent,
-                '"/>'
+                '" stroke-width="10" stroke-linecap="round"/>',
+                '<path d="M256 300v-46" stroke="#15191E" stroke-width="6"/>'
             );
         }
         if (badgeId == 1) {
+            // stacked ingots
             return string.concat(
-                '<ellipse cx="256" cy="196" rx="86" ry="30" fill="none" stroke="',
+                '<rect x="176" y="272" width="160" height="34" rx="3" fill="none" stroke="#15191E" stroke-width="8"/>',
+                '<rect x="192" y="232" width="128" height="32" rx="3" fill="none" stroke="',
                 accent,
-                '" stroke-width="14"/>',
-                '<path d="M170 196v44c0 17 39 30 86 30s86-13 86-30v-44" fill="none" stroke="',
-                accent,
-                '" stroke-width="14"/>',
-                '<path d="M170 250v44c0 17 39 30 86 30s86-13 86-30v-44" fill="none" stroke="',
-                accent,
-                '" stroke-width="14"/>'
+                '" stroke-width="8"/>',
+                '<rect x="208" y="192" width="96" height="30" rx="3" fill="none" stroke="#15191E" stroke-width="8"/>'
             );
         }
         if (badgeId == 2) {
+            // a keep with battlements
             return string.concat(
-                '<path d="M176 320V196h48v28h24v-28h48v28h24v-28h16v124z" fill="none" stroke="',
-                accent,
-                '" stroke-width="14" stroke-linejoin="round"/>',
-                '<rect x="232" y="264" width="48" height="56" rx="8" fill="',
+                '<path d="M170 302V196h30v22h20v-22h20v22h20v-22h20v22h30v106z" fill="none" stroke="#15191E" stroke-width="8" stroke-linejoin="round"/>',
+                '<rect x="228" y="252" width="56" height="50" fill="',
                 accent,
                 '"/>'
             );
         }
         if (badgeId == 3) {
+            // hourglass
             return string.concat(
-                '<path d="M196 152h120l-60 68z" fill="none" stroke="',
+                '<path d="M190 168h132l-66 74z" fill="none" stroke="#15191E" stroke-width="8" stroke-linejoin="round"/>',
+                '<path d="M322 168l-66 74v62l66 68H190l66-68v-62z" fill="none" stroke="',
                 accent,
-                '" stroke-width="14" stroke-linejoin="round"/>',
-                '<path d="M316 152l-60 68v52l60 68h-120l60-68v-52z" fill="none" stroke="',
-                accent,
-                '" stroke-width="14" stroke-linejoin="round"/>'
+                '" stroke-width="8" stroke-linejoin="round"/>'
             );
         }
         if (badgeId == 4) {
+            // calendar with 30
             return string.concat(
-                '<rect x="172" y="150" width="168" height="168" rx="20" fill="none" stroke="',
+                '<rect x="168" y="164" width="176" height="150" fill="none" stroke="#15191E" stroke-width="8"/>',
+                '<path d="M168 214h176" stroke="#15191E" stroke-width="8"/>',
+                '<path d="M210 142v40M302 142v40" stroke="',
                 accent,
-                '" stroke-width="14"/>',
-                '<path d="M172 196h168" stroke="',
-                accent,
-                '" stroke-width="14"/>',
-                '<text x="256" y="278" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="72" font-weight="700" fill="',
+                '" stroke-width="8" stroke-linecap="round"/>',
+                '<text x="256" y="292" text-anchor="middle" font-family="Georgia, serif" font-size="62" font-weight="700" fill="',
                 accent,
                 '">30</text>'
             );
         }
+        // coin with a sprouting shoot
         return string.concat(
-            '<circle cx="256" cy="236" r="74" fill="none" stroke="',
+            '<circle cx="256" cy="250" r="74" fill="none" stroke="#15191E" stroke-width="8"/>',
+            '<path d="M256 292v-52" stroke="',
             accent,
-            '" stroke-width="14"/>',
-            '<text x="256" y="256" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="58" font-weight="700" fill="',
+            '" stroke-width="8" stroke-linecap="round"/>',
+            '<path d="M256 250c0-26 20-42 46-42-2 28-18 42-46 42z" fill="',
             accent,
-            '">10</text>'
+            '"/>',
+            '<path d="M256 272c0-22-16-34-38-34 2 22 16 34 38 34z" fill="none" stroke="#15191E" stroke-width="7"/>'
         );
     }
 
