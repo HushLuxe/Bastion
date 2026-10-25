@@ -1,44 +1,51 @@
 // SPDX-License-Identifier: MIT
 import type { Milestone } from '../hooks/useBastion'
-import { CheckIcon } from './icons'
 
-/** Progress list toward each milestone. Every bar is driven by on-chain state. */
+/** Progress toward each milestone — drawn as measured rules, not glossy bars. */
 export function MilestoneList({ milestones }: { milestones: Milestone[] }) {
   return (
-    <div className="space-y-4">
+    <div>
       {milestones.map((milestone, index) => (
         <div
           key={milestone.id}
-          className="animate-fade-up"
-          style={{ animationDelay: `${index * 60}ms` }}
+          className="animate-fade-up grid grid-cols-[3rem_1fr_6rem] items-center gap-4 border-b border-ink/10 py-3.5"
+          style={{ animationDelay: `${index * 50}ms` }}
         >
-          <div className="mb-2 flex items-baseline justify-between gap-3">
-            <span
-              className={`flex items-center gap-2 font-display text-sm font-medium ${
-                milestone.earned ? 'text-bastion-ink' : 'text-bastion-muted'
-              }`}
-            >
-              {milestone.earned && (
-                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-bastion-amber text-bastion-bg">
-                  <CheckIcon className="h-3 w-3" />
-                </span>
-              )}
-              {milestone.title}
-            </span>
-            <span className="font-mono text-[11px] text-bastion-muted">
-              {milestone.current} / {milestone.target}
-            </span>
+          <span className="figure text-xs text-ink-faint">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+
+          <div className="min-w-0">
+            <div className="flex items-baseline justify-between gap-3">
+              <span
+                className={`text-sm ${milestone.earned ? 'font-medium text-ink' : 'text-ink-soft'}`}
+              >
+                {milestone.title}
+              </span>
+              <span className="figure shrink-0 text-[11px] text-ink-faint">
+                {milestone.current} / {milestone.target}
+              </span>
+            </div>
+            <div className="mt-2 h-[3px] w-full bg-ink/10">
+              <div
+                className={`h-full origin-left transition-all duration-700 ${
+                  milestone.earned ? 'bg-verdigris' : 'bg-ink/25'
+                }`}
+                style={{
+                  width: `${milestone.earned ? 100 : Math.max(milestone.progress, 1)}%`,
+                  transform: 'scaleX(1)',
+                }}
+              />
+            </div>
           </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-bastion-bg-2">
-            <div
-              className={`h-full rounded-full transition-all duration-700 ${
-                milestone.earned
-                  ? 'bg-gradient-to-r from-bastion-amber-deep to-bastion-amber-soft'
-                  : 'bg-bastion-stone-3'
-              }`}
-              style={{ width: `${milestone.earned ? 100 : Math.max(milestone.progress, 2)}%` }}
-            />
-          </div>
+
+          <span
+            className={`figure justify-self-end text-xs ${
+              milestone.earned ? 'text-verdigris' : 'text-ink-faint'
+            }`}
+          >
+            {milestone.earned ? 'UNLOCKED' : `${Math.floor(milestone.progress)}%`}
+          </span>
         </div>
       ))}
     </div>

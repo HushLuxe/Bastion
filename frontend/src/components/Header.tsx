@@ -3,36 +3,35 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 import { Link, NavLink } from 'react-router-dom'
 
-import { KeepIcon } from './icons'
-
 const NAV = [
-  { to: '/', label: 'Bastion' },
+  { to: '/', label: 'Overview' },
   { to: '/dashboard', label: 'Dashboard' },
   { to: '/achievements', label: 'Achievements' },
 ]
-
-function navClass({ isActive }: { isActive: boolean }) {
-  return `rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-    isActive ? 'text-bastion-amber' : 'text-bastion-muted hover:text-bastion-ink'
-  }`
-}
 
 export function Header() {
   const { address, isConnected } = useAccount()
 
   return (
-    <header className="sticky top-0 z-40 border-b border-bastion-line-soft bg-bastion-bg/92 backdrop-blur-xl">
-      <div className="shell flex items-center gap-4 py-3.5">
-        <Link to="/" className="flex shrink-0 items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-bastion-amber text-bastion-bg shadow-[0_10px_30px_-12px_rgba(240,162,2,0.9)]">
-            <KeepIcon className="h-5 w-5" />
-          </span>
-          <span className="font-display text-lg font-semibold tracking-tight">Bastion</span>
+    <header className="border-b border-ink/15 bg-paper/92 backdrop-blur-sm">
+      <div className="shell flex h-16 items-center gap-8">
+        <Link to="/" className="flex items-center gap-2.5">
+          <Mark />
+          <span className="font-display text-[22px] leading-none tracking-tight">Bastion</span>
         </Link>
 
-        <nav className="ml-2 hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((item) => (
-            <NavLink key={item.to} to={item.to} end={item.to === '/'} className={navClass}>
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === '/'}
+              className={({ isActive }) =>
+                `link-underline eyebrow transition-colors ${
+                  isActive ? 'text-verdigris' : 'text-ink-soft hover:text-ink'
+                }`
+              }
+            >
               {item.label}
             </NavLink>
           ))}
@@ -40,7 +39,7 @@ export function Header() {
 
         <div className="ml-auto flex items-center gap-3">
           {isConnected && (
-            <span className="hidden font-mono text-xs text-bastion-muted sm:inline">
+            <span className="figure hidden text-xs text-ink-soft sm:inline">
               {address?.slice(0, 6)}…{address?.slice(-4)}
             </span>
           )}
@@ -49,19 +48,13 @@ export function Header() {
             {({ account, openConnectModal, openAccountModal, mounted }) => {
               if (!mounted || !account) {
                 return (
-                  <button
-                    onClick={openConnectModal}
-                    className="btn-amber btn-amber-hover px-4 py-2 text-sm"
-                  >
+                  <button onClick={openConnectModal} className="btn-ink px-4 py-2 text-sm">
                     Connect wallet
                   </button>
                 )
               }
               return (
-                <button
-                  onClick={openAccountModal}
-                  className="btn-stone px-4 py-2 text-sm"
-                >
+                <button onClick={openAccountModal} className="btn-outline px-4 py-2 text-sm">
                   {account.displayName ?? `${account.address.slice(0, 6)}…${account.address.slice(-4)}`}
                 </button>
               )
@@ -70,5 +63,17 @@ export function Header() {
         </div>
       </div>
     </header>
+  )
+}
+
+/** The mark: a plan of the keep, drawn as linework. */
+export function Mark({ className = 'h-7 w-7' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" className={className} fill="none" aria-hidden>
+      <rect x="1" y="1" width="30" height="30" stroke="#15191e" strokeOpacity="0.22" />
+      <path d="M7 25V14a9 9 0 0 1 18 0v11" stroke="#15191e" strokeWidth="1.8" />
+      <path d="M5 25h22" stroke="#1f5f52" strokeWidth="2.2" />
+      <path d="M16 25v-6" stroke="#1f5f52" strokeWidth="1.6" />
+    </svg>
   )
 }
