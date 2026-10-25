@@ -9,13 +9,13 @@
 export const MUSD_ADDRESS = '0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503' as const
 
 export const VAULT_ADDRESS = (import.meta.env.VITE_VAULT_ADDRESS ??
-  '0x1f01c11bc7372b4a42bf7a1d64d3862060b1218e') as `0x${string}`
+  '0xcdf6add60726fb123c26e668e6d4eef06c2c167b') as `0x${string}`
 
 export const RECEIPT_ADDRESS = (import.meta.env.VITE_RECEIPT_ADDRESS ??
-  '0xd3f555153F835C168E5595d311F6AdC204B403cd') as `0x${string}`
+  '0x52a6ebf2f1507b27b88654fc1d933a59607ecd24') as `0x${string}`
 
 export const ACHIEVEMENTS_ADDRESS = (import.meta.env.VITE_ACHIEVEMENTS_ADDRESS ??
-  '0x2eaa9e647194b882c12030C86DdaABDE79e75C2b') as `0x${string}`
+  '0x767dcd140217501e05e72d72de5c4339b76c1009') as `0x${string}`
 
 export const isDeployed = VAULT_ADDRESS !== '0x0000000000000000000000000000000000000000'
 
