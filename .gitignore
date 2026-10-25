@@ -32,3 +32,9 @@ pnpm-debug.log*
 
 # Vercel
 .vercel
+
+# Video files - hosted externally (YouTube)
+*.mp4
+*.mov
+*.avi
+assets/video/
