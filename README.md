@@ -68,8 +68,7 @@ Executed using two non-deployer wallets (`0x222dCAfe7bfba7Da1207BA2F3CDD7e4B42F9
 Bastion/
 ├── contracts/          # Solidity 0.8.28 contracts, Foundry tests, fork tests & deploy scripts
 ├── frontend/           # React 18, TypeScript, Vite, Tailwind, wagmi, viem, Mezo Passport
-├── assets/             # Pitch deck (deck.html, deck.pdf, slides/), branding, live screenshots
-└── docs/               # Submission package (docs/submission.md) & markdown pitch deck
+└── assets/             # Pitch deck (deck.html, deck.pdf, slides/), branding, live screenshots
 ```
 
 ## Running Tests & Local Development
