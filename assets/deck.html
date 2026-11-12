@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Bastion — Mezo Buildathon deck</title>
+    <title>Bastion — Mezo Buildathon Wave 2 Pitch Deck</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,262 +16,390 @@
       body { font-family: 'IBM Plex Sans', sans-serif; color: #15191e; -webkit-font-smoothing: antialiased; }
       .slide {
         position: relative; width: 1280px; height: 720px; overflow: hidden;
-        background: #0a0d12; page-break-after: always; break-after: page;
+        background: #edeae3; page-break-after: always; break-after: page;
       }
+      .slide.dark { background: #15191e; color: #edeae3; }
       .slide:last-child { page-break-after: auto; break-after: auto; }
       .masonry {
-        position: absolute; inset: 0; opacity: .9;
+        position: absolute; inset: 0;
         background-image:
           linear-gradient(to right, rgba(21,25,30,.05) 1px, transparent 1px),
           linear-gradient(to bottom, rgba(21,25,30,.05) 1px, transparent 1px);
         background-size: 32px 32px;
       }
-      .torch { display: none; }
-      .inner { position: relative; z-index: 2; padding: 64px 76px; height: 100%; display: flex; flex-direction: column; }
-      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
-      .brand svg { width: 34px; height: 34px; }
-      .brand span { font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; letter-spacing: -.01em; color: #15191e; }
-      .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #5c6672; }
-      h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: 66px; font-weight: 400; letter-spacing: -.015em; line-height: 1.0; }
-      h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 50px; font-weight: 400; letter-spacing: -.01em; line-height: 1.04; }
-      .amber { color: #1f5f52; font-style: italic; }
-      .lede { font-size: 18px; line-height: 1.6; color: #5c6672; max-width: 720px; }
-      .body { font-size: 16px; line-height: 1.6; color: #5c6672; }
-      .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center;
-        font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8b93a0; }
-      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
-      .card { background: #f4f1ea; border: 1px solid rgba(21,25,30,.16); border-radius: 2px; padding: 22px 20px; }
-      .card h3 { font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; font-weight: 400; margin-bottom: 6px; }
+      .slide.dark .masonry {
+        background-image:
+          linear-gradient(to right, rgba(237,234,227,.06) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(237,234,227,.06) 1px, transparent 1px);
+      }
+      .inner { position: relative; z-index: 2; padding: 56px 72px; height: 100%; display: flex; flex-direction: column; }
+      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+      .brand svg { width: 32px; height: 32px; }
+      .brand span { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; letter-spacing: -.01em; }
+      .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #5c6672; }
+      .slide.dark .eyebrow { color: #8b93a0; }
+      h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: 64px; font-weight: 400; letter-spacing: -.015em; line-height: 1.0; }
+      h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 46px; font-weight: 400; letter-spacing: -.01em; line-height: 1.04; }
+      .accent { color: #1f5f52; font-style: italic; }
+      .slide.dark .accent { color: #58b89f; }
+      .lede { font-size: 18px; line-height: 1.55; color: #5c6672; max-width: 740px; }
+      .slide.dark .lede { color: #c4bfb5; }
+      .foot {
+        margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(21,25,30,.12);
+        display: flex; justify-content: space-between; align-items: center;
+        font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5c6672;
+      }
+      .slide.dark .foot { border-top-color: rgba(237,234,227,.15); color: #8b93a0; }
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 26px; }
+      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
+      .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
+      .card { background: #f4f1ea; border: 1px solid rgba(21,25,30,.16); border-radius: 2px; padding: 20px; }
+      .slide.dark .card { background: #1d2229; border-color: rgba(237,234,227,.16); }
+      .card h3 { font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; font-weight: 400; margin-bottom: 8px; }
       .card p { font-size: 14px; line-height: 1.55; color: #5c6672; }
-      .num { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 500; color: #1f5f52; }
-      .label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #5c6672; }
+      .slide.dark .card p { color: #b7b3aa; }
+      .num { font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: #1f5f52; margin-bottom: 6px; }
+      .slide.dark .num { color: #58b89f; }
       ul { list-style: none; }
-      li { position: relative; padding-left: 24px; margin-bottom: 13px; font-size: 16.5px; line-height: 1.5; color: #5c6672; }
-      li::before { content: ''; position: absolute; left: 0; top: 9px; width: 7px; height: 7px;
-        background: #1f5f52; }
+      li { position: relative; padding-left: 20px; margin-bottom: 11px; font-size: 15px; line-height: 1.5; color: #3d4650; }
+      .slide.dark li { color: #c4bfb5; }
+      li::before { content: ''; position: absolute; left: 0; top: 8px; width: 7px; height: 7px; background: #1f5f52; }
+      .slide.dark li::before { background: #58b89f; }
       li b { color: #15191e; font-weight: 600; }
-      .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 26px; }
-      .stat { background: #f4f1ea; border: 1px solid rgba(21,25,30,.16); border-radius: 2px; padding: 16px 18px; }
-      .stat .v { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; font-weight: 400; margin-top: 4px; }
-      .pill { display: inline-block; padding: 6px 14px; border-radius: 2px; font-family: 'IBM Plex Mono', monospace;
-        font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #1f5f52;
+      .slide.dark li b { color: #edeae3; }
+      .pill { display: inline-block; padding: 6px 12px; border-radius: 2px; font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #1f5f52;
         background: #f4f1ea; border: 1px solid rgba(21,25,30,.2); }
-      .code { font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.75; color: #1f5f52;
-        background: #f4f1ea; border: 1px solid rgba(21,25,30,.16); border-radius: 2px; padding: 20px 22px; }
-      table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 15.5px; }
-      th { text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em;
+      .code { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; line-height: 1.7; color: #1f5f52;
+        background: #f4f1ea; border: 1px solid rgba(21,25,30,.16); border-radius: 2px; padding: 16px 18px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 14px; }
+      th { text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em;
         text-transform: uppercase; color: #5c6672; font-weight: 500; padding-bottom: 10px; }
-      td { padding: 11px 0; border-top: 1px solid rgba(21,25,30,.14); color: #3d4650; }
+      td { padding: 10px 0; border-top: 1px solid rgba(21,25,30,.12); color: #3d4650; }
       td.ok { color: #1f5f52; font-weight: 600; }
-      .badge { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border-radius: 2px;
-        border: 1px solid rgba(21,25,30,.16); background: #f4f1ea; }
-      .badge.locked { opacity: .5; }
-      .badge .dot { width: 34px; height: 34px; border-radius: 2px; background: #edeae3;
-        border: 1px solid rgba(31,95,82,.4); display: flex; align-items: center; justify-content: center;
-        color: #1f5f52; font-family: 'IBM Plex Mono'; font-weight: 500; font-size: 12px; }
-      .gate { position: absolute; right: 90px; top: 120px; width: 300px; height: 300px; z-index: 1; }
+      .gate { position: absolute; right: 72px; top: 96px; width: 270px; height: 270px; z-index: 1; }
     </style>
   </head>
   <body>
-    <!-- 1 · title -->
+    <!-- 1 · Title -->
     <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
+      <div class="masonry"></div>
       <svg class="gate" viewBox="0 0 200 200">
-        <rect x="10" y="10" width="180" height="180" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.4" stroke-width="2"/>
+        <rect x="10" y="10" width="180" height="180" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" stroke-width="2"/>
         <path d="M40 150v-56a60 60 0 0 1 120 0v56" fill="none" stroke="#15191E" stroke-width="9"/>
-        <path d="M30 150h140" stroke="#1F5F52" stroke-width="9" stroke-linecap="round"/>
+        <path d="M30 150h140" stroke="#1F5F52" stroke-width="9"/>
         <path d="M76 150v-30a24 24 0 0 1 48 0v30" fill="none" stroke="#15191E" stroke-width="7"/>
       </svg>
       <div class="inner">
         <div class="brand">
-          <svg viewBox="0 0 256 256"><rect x="8" y="8" width="240" height="240" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.45" stroke-width="3"/><path d="M56 200v-84a72 72 0 0 1 144 0v84" fill="none" stroke="#15191E" stroke-width="12"/><path d="M46 200h164" stroke="#1F5F52" stroke-width="12" stroke-linecap="round"/><path d="M100 200v-46a28 28 0 0 1 56 0v46" fill="none" stroke="#15191E" stroke-width="9"/></svg>
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="1" y="1" width="30" height="30" stroke="#15191e" stroke-opacity="0.3"/>
+            <path d="M7 25V14a9 9 0 0 1 18 0v11" stroke="#15191e" stroke-width="2"/>
+            <path d="M5 25h22" stroke="#1f5f52" stroke-width="2.4"/>
+          </svg>
           <span>Bastion</span>
         </div>
-        <h1>Fortify your MUSD.<br /><span class="amber">Earn the badges.</span></h1>
+        <span class="eyebrow">Mezo Buildathon · Wave 2 Final Submission · Team Hackdev</span>
+        <h1 style="margin-top: 14px">Fortify your MUSD.<br /><span class="accent">Earn the badges.</span></h1>
         <p class="lede" style="margin-top: 20px">
-          Gamified MUSD savings on Mezo. Deposit MUSD, earn yield every second, and unlock
-          ERC-721 achievement badges as you hit savings milestones.
+          Gamified MUSD savings on Mezo. Route deposits into the Mezo Stability Pool, earn real
+          BTC-to-MUSD liquidation yield, and mint soulbound on-chain milestone NFTs.
         </p>
-        <div style="margin-top: 24px; display: flex; gap: 10px;">
+        <div style="margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px;">
           <span class="pill">Mezo Testnet · 31611</span>
-          <span class="pill">Settled in MUSD</span>
-          <span class="pill">Gas in BTC</span>
-          <span class="pill">ERC-721 badges</span>
+          <span class="pill">L3+ Stability Pool</span>
+          <span class="pill">10% Protocol Fee</span>
+          <span class="pill">10 Soulbound Badges</span>
+          <span class="pill">Verified on Blockscout</span>
         </div>
-        <div class="foot"><span>bastion-two-hazel.vercel.app</span><span>github.com/Ryjen1/Bastion</span></div>
+        <div class="foot">
+          <span>bastion-two-hazel.vercel.app</span>
+          <span>github.com/HushLuxe/Bastion · Slide 1 / 9</span>
+        </div>
       </div>
     </section>
 
-    <!-- 2 · problem -->
+    <!-- 2 · Problem -->
     <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
+      <div class="masonry"></div>
       <div class="inner">
-        <div class="brand"><span>Bastion</span></div>
-        <div class="eyebrow">The problem</div>
-        <h2 style="margin-top: 12px;">Yield vaults feel cold.<br /><span class="amber">Saving should feel earned.</span></h2>
+        <span class="eyebrow">01 · The Problem</span>
+        <h2 style="margin-top: 8px">Holding MUSD passively leaves<br /><span class="accent">yield &amp; retention on the table.</span></h2>
+        <div class="grid-3">
+          <div class="card">
+            <div class="num">01 / Habit Gap</div>
+            <h3>Zero progression</h3>
+            <p>Conventional yield vaults render a static APY table. Everyday savers lose motivation without goals, streaks, or visible milestones.</p>
+          </div>
+          <div class="card">
+            <div class="num">02 / Yield Friction</div>
+            <h3>Idle or subsidized vaults</h3>
+            <p>Wave 1 used owner-funded rates instead of real protocol yield, making APY unsustainable without an actual Mezo yield source.</p>
+          </div>
+          <div class="card">
+            <div class="num">03 / Broken Receipts</div>
+            <h3>Non-transferable stakes</h3>
+            <p>Transferring wrapped vault receipts often breaks principal/yield attribution, locking downstream recipients out of claiming.</p>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Gamified Savings · DeFi + NFT · On-Chain Achievements</span>
+          <span>Slide 2 / 9</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · Product & Gameplay Loop -->
+    <section class="slide">
+      <div class="masonry"></div>
+      <div class="inner">
+        <span class="eyebrow">02 · The Product</span>
+        <h2 style="margin-top: 8px">Savings goals, quests, leaderboard<br /><span class="accent">&amp; soulbound SVG badges.</span></h2>
         <div class="grid-2">
-          <div class="card"><h3>You deposit and wait</h3><p>A number goes up slowly. There is no sense of progress, no milestone, no reward for consistency.</p></div>
-          <div class="card"><h3>No reason to stay</h3><p>Without a visible progression system, engagement and long-term retention are hard to earn.</p></div>
-          <div class="card"><h3>MUSD deserves more</h3><p>A Bitcoin-backed stablecoin should earn its place in an ecosystem built around saving and spending.</p></div>
-          <div class="card"><h3>The gap</h3><p>Every MUSD vault offers yield. None of them offer a record of how far you have come.</p></div>
-        </div>
-        <div class="foot"><span>Bastion — Mezo Buildathon</span><span>02</span></div>
-      </div>
-    </section>
-
-    <!-- 3 · solution -->
-    <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
-      <div class="inner">
-        <div class="brand"><span>Bastion</span></div>
-        <div class="eyebrow">The solution</div>
-        <h2 style="margin-top: 12px;">A vault with a <span class="amber">progression system</span>.</h2>
-        <ul style="margin-top: 26px;">
-          <li><b>Deposit MUSD</b> and receive <b>bMUSD receipt shares</b>, 1:1, with no lock-up.</li>
-          <li><b>Yield accrues every second</b> on your position, paid from MUSD the vault already holds.</li>
-          <li><b>Cross a milestone</b> and the vault mints an <b>ERC-721 achievement badge</b> — collectible, on-chain.</li>
-          <li>The interface shows <b>progress toward the next badge</b> at all times, so saving feels active.</li>
-          <li>Badges are <b>rendered from the contract itself</b>: each one is an SVG generated on-chain.</li>
-        </ul>
-        <div class="stat-row">
-          <div class="stat"><div class="label">Milestones</div><div class="v amber">6</div></div>
-          <div class="stat"><div class="label">Receipt</div><div class="v">1:1</div></div>
-          <div class="stat"><div class="label">Badges</div><div class="v">ERC-721</div></div>
-          <div class="stat"><div class="label">Tests</div><div class="v">27</div></div>
-        </div>
-        <div class="foot"><span>bastion-two-hazel.vercel.app</span><span>03</span></div>
-      </div>
-    </section>
-
-    <!-- 4 · milestones -->
-    <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
-      <div class="inner">
-        <div class="brand"><span>Bastion</span></div>
-        <div class="eyebrow">Achievements</div>
-        <h2 style="margin-top: 12px;">Six milestones. <span class="amber">One record.</span></h2>
-        <div style="margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="badge"><span class="dot">01</span><span>First Deposit</span></div>
-          <div class="badge"><span class="dot">100</span><span>Saved 100 MUSD</span></div>
-          <div class="badge"><span class="dot">500</span><span>Saved 500 MUSD</span></div>
-          <div class="badge"><span class="dot">7d</span><span>Held for 7 Days</span></div>
-          <div class="badge"><span class="dot">30d</span><span>Held for 30 Days</span></div>
-          <div class="badge"><span class="dot">10</span><span>Earned 10 MUSD in Yield</span></div>
-        </div>
-        <p class="body" style="margin-top: 22px;">
-          Each badge is minted by the vault when your on-chain state crosses the milestone — one
-          per holder, forever. The artwork lives in the contract as an SVG data URI, so it can
-          never be lost or edited.
-        </p>
-        <div class="foot"><span>Badge artwork generated on-chain</span><span>04</span></div>
-      </div>
-    </section>
-
-    <!-- 5 · mechanics -->
-    <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
-      <div class="inner">
-        <div class="brand"><span>Bastion</span></div>
-        <div class="eyebrow">How it works</div>
-        <h2 style="margin-top: 12px;">Yield that <span class="amber">cannot</span> outrun the vault.</h2>
-        <div class="grid-2" style="grid-template-columns: 1.1fr .9fr;">
-          <div class="code">
-deposit(a)<br />
-&nbsp;&nbsp;├─ pull a MUSD, mint a receipt shares 1:1<br />
-&nbsp;&nbsp;└─ reward index starts accruing<br /><br />
-index += ratePerSecond × elapsed<br />
-pendingYield = shares × (index − snapshot)<br /><br />
-withdraw()<br />
-&nbsp;&nbsp;├─ pay principal + accrued yield<br />
-&nbsp;&nbsp;└─ burn receipt shares
-          </div>
-          <div>
-            <ul style="margin-top: 2px;">
-              <li><b>Buffer-backed payouts.</b> Yield is paid from MUSD the vault holds above principal, so payouts are always coverable.</li>
-              <li><b>Deposits always fully backed.</b> <code style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#f7c25b">assets ≥ principal</code> after every operation.</li>
-              <li><b>No owner withdrawal path.</b> The owner sets the rate, funds the buffer and pauses — nothing else.</li>
+          <div class="card">
+            <h3>On-Chain Savings Loop</h3>
+            <ul>
+              <li><b>Create named goals:</b> Target amount + 7, 30, or 90-day duration presets stored directly in BastionVault.</li>
+              <li><b>Deposit canonical MUSD:</b> 1:1 transferable <span style="font-family:'IBM Plex Mono'">bMUSD</span> receipt + live goal progress bar &amp; confetti.</li>
+              <li><b>Levels &amp; Quests:</b> Cross 25% Bronze, 50% Silver, 75% Gold, and 100% Vanguard milestones plus 6 lifetime core quests.</li>
+              <li><b>Live Leaderboard:</b> Ranked by on-chain balance, level, and badge count via <span style="font-family:'IBM Plex Mono'">getLeaderboard()</span>.</li>
             </ul>
-            <div class="card" style="margin-top: 16px;">
-              <div class="label">Wave 1 note</div>
-              <p style="margin-top: 6px;">The rate is owner-controlled so the demo can show accrual on camera. The UI labels it as a demo rate — it is never sold as a real APR.</p>
-            </div>
+          </div>
+          <div class="card">
+            <h3>10 Soulbound ERC-721 Badges</h3>
+            <ul>
+              <li><b>6 Core Milestones:</b> First Deposit, Saved 100 MUSD, Saved 500 MUSD, Held 7 Days, Held 30 Days, Earned 10 MUSD Yield.</li>
+              <li><b>4 Goal Tier Badges:</b> Goal 25% Bronze, 50% Silver, 75% Gold, 100% Vanguard.</li>
+              <li><b>On-chain artwork:</b> Full SVG generated inside <span style="font-family:'IBM Plex Mono'">BastionAchievements</span> (<span style="font-family:'IBM Plex Mono'">tokenURI</span>).</li>
+              <li><b>Zero off-chain backend:</b> No database or centralized indexer required.</li>
+            </ul>
           </div>
         </div>
-        <div class="foot"><span>bastion-two-hazel.vercel.app</span><span>05</span></div>
-      </div>
-    </section>
-
-    <!-- 6 · demo -->
-    <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
-      <div class="inner">
-        <div class="brand"><span>Bastion</span></div>
-        <div class="eyebrow">The demo — 60 seconds</div>
-        <h2 style="margin-top: 12px;">Connect. Deposit. <span class="amber">Unlock.</span></h2>
-        <div class="grid-2" style="grid-template-columns: repeat(2, 1fr); margin-top: 24px;">
-          <div class="card"><div class="num">01</div><h3 style="margin-top: 5px;">Connect</h3><p>Any Bitcoin or EVM wallet through Mezo Passport.</p></div>
-          <div class="card"><div class="num">02</div><h3 style="margin-top: 5px;">Deposit</h3><p>Approve MUSD once, deposit, receive bMUSD receipt shares.</p></div>
-          <div class="card"><div class="num">03</div><h3 style="margin-top: 5px;">Watch it accrue</h3><p>Yield ticks up every second and the progress bars move.</p></div>
-          <div class="card"><div class="num">04</div><h3 style="margin-top: 5px;">Unlock</h3><p>The vault mints your badge the moment you cross a milestone.</p></div>
+        <div class="foot">
+          <span>Bastion · Every deposit advances goals &amp; mints proof</span>
+          <span>Slide 3 / 9</span>
         </div>
-        <p class="body" style="margin-top: 20px;">No account, no lock-up, no custodian — the receipt and the badges are yours on-chain.</p>
-        <div class="foot"><span>bastion-two-hazel.vercel.app</span><span>06</span></div>
       </div>
     </section>
 
-    <!-- 7 · built -->
-    <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
+    <!-- 4 · L3+ Mezo Yield Routing -->
+    <section class="slide dark">
+      <div class="masonry"></div>
       <div class="inner">
-        <div class="brand"><span>Bastion</span></div>
-        <div class="eyebrow">What is built today</div>
-        <h2 style="margin-top: 12px;">Shipped on <span class="amber">Mezo Testnet</span>.</h2>
+        <span class="eyebrow">03 · Level 3+ Mezo Integration</span>
+        <h2 style="margin-top: 8px">Real yield from <span class="accent">Mezo Stability Pool + Pools Router.</span></h2>
+        <p class="lede" style="margin-top: 12px">
+          Every MUSD deposited leaves no idle treasury subsidies: Bastion supplies canonical MUSD directly into Mezo&apos;s Stability Pool and converts BTC liquidation gains back into MUSD.
+        </p>
+        <div class="grid-4">
+          <div class="card">
+            <div class="num">Step 1</div>
+            <h3>Canonical Deposit</h3>
+            <p>User approves MUSD (<span style="font-family:'IBM Plex Mono'">0x1189...503</span>) and calls <span style="font-family:'IBM Plex Mono'">depositToGoal()</span>.</p>
+          </div>
+          <div class="card">
+            <div class="num">Step 2</div>
+            <h3>Stability Pool</h3>
+            <p>Vault calls <span style="font-family:'IBM Plex Mono'">provideToSP(amount)</span> on Mezo Stability Pool (<span style="font-family:'IBM Plex Mono'">0x1CCA...680e</span>).</p>
+          </div>
+          <div class="card">
+            <div class="num">Step 3</div>
+            <h3>BTC → MUSD Harvest</h3>
+            <p>Permissionless <span style="font-family:'IBM Plex Mono'">harvest()</span> claims BTC collateral gains and swaps via Mezo Pools Router (<span style="font-family:'IBM Plex Mono'">0x9a1f...7E9</span>).</p>
+          </div>
+          <div class="card">
+            <div class="num">Step 4</div>
+            <h3>Real Index Payout</h3>
+            <p>90% raises <span style="font-family:'IBM Plex Mono'">accruedPerShare</span>; 10% goes to treasury. UI displays realized on-chain APY only.</p>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Zero fake APR · Zero owner yield funding · Pure Mezo composability</span>
+          <span>Slide 4 / 9</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Business Model -->
+    <section class="slide">
+      <div class="masonry"></div>
+      <div class="inner">
+        <span class="eyebrow">04 · Business Model &amp; Sustainability</span>
+        <h2 style="margin-top: 8px">Protocol revenue tied <span class="accent">strictly to real yield.</span></h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="num">10% Yield Fee (On-Chain)</div>
+            <h3>Treasury Performance Fee</h3>
+            <p>
+              Configured on-chain at <span style="font-family:'IBM Plex Mono'">protocolFeeBps = 1000</span> (capped at 25%). Every harvest splits realized MUSD automatically: 90% to bMUSD savers, 10% directly to the Bastion treasury. Zero principal fees.
+            </p>
+          </div>
+          <div class="card">
+            <div class="num">Unit Economics</div>
+            <h3>Self-Sustaining Savings Layer</h3>
+            <ul>
+              <li><b>Zero emissions burn:</b> No inflationary reward token or treasury giveaway required.</li>
+              <li><b>Composable bMUSD:</b> ERC-20 receipt token retains yield eligibility across transfers.</li>
+              <li><b>Future B2B quests:</b> Protocol partners sponsor custom savings cohorts post-hackathon.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Principal untouched · Revenue scales linearly with Stability Pool liquidation volume</span>
+          <span>Slide 5 / 9</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Wave 2 Engineering Fixes & Verification -->
+    <section class="slide">
+      <div class="masonry"></div>
+      <div class="inner">
+        <span class="eyebrow">05 · Wave 2 Engineering Audit</span>
+        <h2 style="margin-top: 8px">Every Wave 1 defect resolved &amp; <span class="accent">contracts verified.</span></h2>
         <table>
-          <thead><tr><th>Piece</th><th>Status</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Wave 1 State</th>
+              <th>Wave 2 Shipped &amp; Verified</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>BastionVault — deposit, withdraw, reward index, milestone checks</td><td class="ok">done — live on testnet</td></tr>
-            <tr><td>BastionReceipt (ERC-20 bMUSD) — 1:1 claim on the vault</td><td class="ok">done</td></tr>
-            <tr><td>BastionAchievements (ERC-721) — badges with on-chain SVG metadata</td><td class="ok">done</td></tr>
-            <tr><td>Frontend — landing, dashboard with live yield, badge gallery</td><td class="ok">done — live</td></tr>
-            <tr><td>Tests — deposit/withdraw, accrual, all six badges, fuzz, invariants</td><td class="ok">27 passing</td></tr>
+            <tr>
+              <td>Yield Source &amp; Level</td>
+              <td>L2 plain ERC-20 + subsidized rate</td>
+              <td class="ok">L3+ Mezo StabilityPool + Router BTC→MUSD harvest + 10% fee</td>
+            </tr>
+            <tr>
+              <td>P2(a) Yield Carry</td>
+              <td>Discarded carry on balance mutations</td>
+              <td class="ok">Preserved <span style="font-family:'IBM Plex Mono'">carry</span> across deposit, withdraw, redeem, claim &amp; transfer</td>
+            </tr>
+            <tr>
+              <td>P2(b) Transferred bMUSD</td>
+              <td>Recipients could not redeem bMUSD</td>
+              <td class="ok"><span style="font-family:'IBM Plex Mono'">onShareTransfer</span> hook syncs index; any holder redeems 1:1</td>
+            </tr>
+            <tr>
+              <td>P3 Honest Claims</td>
+              <td>Implied unconditional withdrawals</td>
+              <td class="ok">Discloses owner killswitch (<span style="font-family:'IBM Plex Mono'">setPaused</span>) &amp; SP exit rules in app/docs</td>
+            </tr>
+            <tr>
+              <td>P4 Verification &amp; Tests</td>
+              <td>Unverified / dead addresses</td>
+              <td class="ok">3/3 contracts verified on Blockscout · 15 unit/fuzz + 1 live fork test pass</td>
+            </tr>
           </tbody>
         </table>
-        <div class="stat-row">
-          <div class="stat"><div class="label">Vault</div><div class="v" style="font-size:14px;font-family:'JetBrains Mono',monospace;">0x1f01c11b…b1218e</div></div>
-          <div class="stat"><div class="label">Chain</div><div class="v">31611</div></div>
-          <div class="stat"><div class="label">Asset</div><div class="v">MUSD</div></div>
-          <div class="stat"><div class="label">Gas</div><div class="v">BTC</div></div>
+        <div class="foot">
+          <span>forge test: 15 passed, 0 failed · BastionMezoForkTest: 1 passed</span>
+          <span>Slide 6 / 9</span>
         </div>
-        <div class="foot"><span>github.com/Ryjen1/Bastion</span><span>07</span></div>
       </div>
     </section>
 
-    <!-- 8 · roadmap -->
+    <!-- 7 · Verified Deployments & Non-Deployer Proof -->
     <section class="slide">
-      <div class="masonry"></div><div class="torch"></div>
+      <div class="masonry"></div>
       <div class="inner">
-        <div class="brand"><span>Bastion</span></div>
-        <div class="eyebrow">Roadmap</div>
-        <h2 style="margin-top: 12px;">From a vault to a <span class="amber">record of your savings</span>.</h2>
-        <div class="grid-3">
-          <div class="card"><div class="label">Wave 1</div><h3 style="margin-top: 5px;">Real yield</h3><p>Point the reward index at a genuine MUSD yield source instead of the controlled demo rate.</p></div>
-          <div class="card"><div class="label">Wave 2</div><h3 style="margin-top: 5px">More milestones</h3><p>Streaks, tiers and seasonal badges — plus transferable achievement boosting.</p></div>
-          <div class="card"><div class="label">Beyond</div><h3 style="margin-top: 5px">The full loop</h3><p>Borrow against a Bastion position, keep earning on the collateral, and let savings fund itself.</p></div>
-        </div>
-        <div style="margin-top: 30px; display: flex; align-items: center; gap: 18px;">
-          <div>
-            <div class="label">Try it</div>
-            <div style="font-family:'Sora',sans-serif;font-size:28px;font-weight:700;margin-top:4px;">bastion-two-hazel.vercel.app</div>
+        <span class="eyebrow">06 · On-Chain Proof (Mezo Testnet 31611)</span>
+        <h2 style="margin-top: 8px">Live contracts &amp; <span class="accent">non-deployer user transactions.</span></h2>
+        <div class="grid-2">
+          <div class="code">
+            <b>Verified Wave 2 Contracts (Blockscout)</b><br />
+            BastionVault: 0x2fB1b2C30fF925b2A544777981c8562A05763d0e<br />
+            BastionReceipt (bMUSD): 0xa28BE7b55D62282220CF1df013eF29C4f0977Db4<br />
+            BastionAchievements: 0x15db5C0F9b04348c7033043Cc2F6663646aB6e6F<br />
+            Canonical MUSD: 0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503<br />
+            Mezo StabilityPool: 0x1CCA7E410eE41739792eA0A24e00349Dd247680e
           </div>
-          <div style="width:1px;height:46px;background:rgba(255,255,255,.12)"></div>
-          <div>
-            <div class="label">Vault</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;color:rgba(255,255,255,.6);">0x1f01c11bc7372b4a42bf7a1d64d3862060b1218e</div>
+          <div class="code">
+            <b>Real Non-Deployer E2E Txs (Chain 31611)</b><br />
+            Create Goal: 0xb057db7cfa...b9bb7d<br />
+            Deposit 20 MUSD → SP: 0xbc1f34c101...80ad3<br />
+            Transfer 5 bMUSD: 0x6120a8016d...31080<br />
+            Recipient Redeem 5 bMUSD: 0x53b76592cd...2d836<br />
+            User2 Deposit 15 MUSD: 0xf4141d6d7f...e46c<br />
+            Partial Withdraw 2 bMUSD: 0xaa891a5969...02a8d
           </div>
         </div>
-        <div class="foot"><span>Bastion — savings with strength · settled in MUSD on Mezo</span><span>08</span></div>
+        <div class="foot">
+          <span>Active StabilityPool position verified: 28.00 MUSD across 2 non-deployer savers</span>
+          <span>Slide 7 / 9</span>
+        </div>
       </div>
     </section>
+
+    <!-- 8 · Roadmap -->
+    <section class="slide">
+      <div class="masonry"></div>
+      <div class="inner">
+        <span class="eyebrow">07 · Post-Hackathon Roadmap</span>
+        <h2 style="margin-top: 8px">Wave 3 Lending Loop &amp; <span class="accent">Wave 4 Bastion Everywhere.</span></h2>
+        <div class="grid-3">
+          <div class="card">
+            <div class="num">Milestone 1 · Q1 Post-Wave</div>
+            <h3>MUSD/BTCb Lending Loop</h3>
+            <p>Optional automated MUSD/BTCb collateralized borrowing strategies (Aave-style health-factor guards) letting advanced savers compound hedged exposure.</p>
+          </div>
+          <div class="card">
+            <div class="num">Milestone 2 · Q2 Expansion</div>
+            <h3>Bastion Everywhere</h3>
+            <p>Direct MUSD acquisition flows using local payment rails in Nigeria and emerging markets, pairing instant stablecoin entry with goal-based saving.</p>
+          </div>
+          <div class="card">
+            <div class="num">Milestone 3 · Mainnet</div>
+            <h3>Audit &amp; Mezo Mainnet</h3>
+            <p>External smart contract security audit, timelocked governance around pause/fee controls, and multi-cohort institutional quests.</p>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Wave 2 ships clean Stability Pool savings first; Wave 3/4 expand capital &amp; access</span>
+          <span>Slide 8 / 9</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · Links & Team -->
+    <section class="slide dark">
+      <div class="masonry"></div>
+      <div class="inner">
+        <span class="eyebrow">08 · Ready to Inspect &amp; Test</span>
+        <h2 style="margin-top: 8px">Open, verified, and <span class="accent">live on Mezo Testnet.</span></h2>
+        <div class="grid-2" style="margin-top: 32px;">
+          <div class="card">
+            <h3>Try Bastion Now</h3>
+            <ul>
+              <li><b>Live dApp:</b> https://bastion-two-hazel.vercel.app</li>
+              <li><b>Public GitHub:</b> https://github.com/HushLuxe/Bastion</li>
+              <li><b>Mezo Explorer:</b> https://explorer.test.mezo.org</li>
+              <li><b>Wallet Support:</b> Mezo Passport (Bitcoin + EVM)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Team Hackdev</h3>
+            <ul>
+              <li><b>Lead Builder:</b> Maryjane Okafor</li>
+              <li><b>Stack:</b> Solidity 0.8.28 (Foundry), React 18, TypeScript, wagmi, viem, Mezo Passport</li>
+              <li><b>License:</b> Open Source MIT</li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Bastion — Gamified MUSD Savings on Mezo</span>
+          <span>Slide 9 / 9</span>
+        </div>
+      </div>
+    </section>
+    <script>
+      if (location.hash.startsWith('#slide=')) {
+        const n = Number(location.hash.slice(7));
+        document.querySelectorAll('.slide').forEach((el, i) => {
+          if (i + 1 !== n) el.style.display = 'none';
+        });
+      }
+    </script>
   </body>
 </html>
