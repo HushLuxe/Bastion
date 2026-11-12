@@ -31,11 +31,11 @@ const evmWallets = walletConnectProjectId
   : [injectedWallet]
 
 export const wagmiConfig = getConfig({
-  appName: 'Annex',
-  appDescription: 'Gamified MUSD savings: earn yield, unlock achievement badges',
-  appUrl: typeof window === 'undefined' ? 'https://annex.me' : window.location.origin,
+  appName: 'Bastion',
+  appDescription: 'Gamified MUSD savings on Mezo: route yield from the Stability Pool and unlock achievement NFTs',
+  appUrl: typeof window === 'undefined' ? 'https://bastion-two-hazel.vercel.app' : window.location.origin,
   mezoNetwork: 'testnet',
-  walletConnectProjectId: walletConnectProjectId || 'annex000000000000000000000000000',
+  walletConnectProjectId: walletConnectProjectId || 'bastion0000000000000000000000000',
   chains: [mezoTestnet],
   transports,
   wallets: [

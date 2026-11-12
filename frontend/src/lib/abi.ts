@@ -1,6 +1,4 @@
-// SPDX-License-Identifier: MIT
-// Generated from the Foundry build output.
-
+// Auto-generated from compiled Wave 2 contracts in contracts/out/
 export const bastionVaultAbi = [
   {
     "type": "constructor",
@@ -9,9 +7,66 @@ export const bastionVaultAbi = [
         "name": "asset_",
         "type": "address",
         "internalType": "contract IERC20"
+      },
+      {
+        "name": "btcToken_",
+        "type": "address",
+        "internalType": "contract IERC20"
+      },
+      {
+        "name": "stabilityPool_",
+        "type": "address",
+        "internalType": "contract IStabilityPool"
+      },
+      {
+        "name": "router_",
+        "type": "address",
+        "internalType": "contract IMezoRouter"
+      },
+      {
+        "name": "poolFactory_",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "treasury_",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "protocolFeeBps_",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "receipt_",
+        "type": "address",
+        "internalType": "contract BastionReceipt"
+      },
+      {
+        "name": "achievements_",
+        "type": "address",
+        "internalType": "contract BastionAchievements"
       }
     ],
     "stateMutability": "nonpayable"
+  },
+  {
+    "type": "receive",
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "BPS_DENOM",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
   },
   {
     "type": "function",
@@ -20,8 +75,60 @@ export const bastionVaultAbi = [
     "outputs": [
       {
         "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_100_VANGUARD",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_25_BRONZE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_50_SILVER",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_75_GOLD",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
       }
     ],
     "stateMutability": "view"
@@ -33,8 +140,8 @@ export const bastionVaultAbi = [
     "outputs": [
       {
         "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint8",
+        "internalType": "uint8"
       }
     ],
     "stateMutability": "view"
@@ -42,6 +149,19 @@ export const bastionVaultAbi = [
   {
     "type": "function",
     "name": "HELD_7_DAYS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "MAX_FEE_BPS",
     "inputs": [],
     "outputs": [
       {
@@ -98,8 +218,8 @@ export const bastionVaultAbi = [
     "outputs": [
       {
         "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint8",
+        "internalType": "uint8"
       }
     ],
     "stateMutability": "view"
@@ -111,8 +231,8 @@ export const bastionVaultAbi = [
     "outputs": [
       {
         "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint8",
+        "internalType": "uint8"
       }
     ],
     "stateMutability": "view"
@@ -163,8 +283,8 @@ export const bastionVaultAbi = [
     "outputs": [
       {
         "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint8",
+        "internalType": "uint8"
       }
     ],
     "stateMutability": "view"
@@ -197,6 +317,25 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
+    "name": "activeGoalId",
+    "inputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "asset",
     "inputs": [],
     "outputs": [
@@ -204,6 +343,38 @@ export const bastionVaultAbi = [
         "name": "",
         "type": "address",
         "internalType": "contract IERC20"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "btcToken",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IERC20"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "carryOf",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
     "stateMutability": "view"
@@ -220,6 +391,48 @@ export const bastionVaultAbi = [
       }
     ],
     "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "createGoal",
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "targetAmount",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "durationDays",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "goalId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "deployedAt",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
   },
   {
     "type": "function",
@@ -261,6 +474,30 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
+    "name": "depositToGoal",
+    "inputs": [
+      {
+        "name": "goalId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "shares",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "depositedTotalOf",
     "inputs": [
       {
@@ -290,26 +527,7 @@ export const bastionVaultAbi = [
     ],
     "outputs": [
       {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "estimatedAnnualYield",
-    "inputs": [
-      {
-        "name": "user",
-        "type": "address",
-        "internalType": "address"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "",
+        "name": "bitmap",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -337,20 +555,268 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
-    "name": "fundYield",
+    "name": "getGoal",
     "inputs": [
       {
-        "name": "amount",
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "goalId",
         "type": "uint256",
         "internalType": "uint256"
       }
     ],
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct BastionVault.SavingsGoal",
+        "components": [
+          {
+            "name": "name",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "targetAmount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "savedAmount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "createdAt",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "deadline",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "highestTier",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "completed",
+            "type": "bool",
+            "internalType": "bool"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getGoalsOf",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple[]",
+        "internalType": "struct BastionVault.SavingsGoal[]",
+        "components": [
+          {
+            "name": "name",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "targetAmount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "savedAmount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "createdAt",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "deadline",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "highestTier",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "completed",
+            "type": "bool",
+            "internalType": "bool"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getLeaderboard",
+    "inputs": [
+      {
+        "name": "offset",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "limit",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "entries",
+        "type": "tuple[]",
+        "internalType": "struct BastionVault.LeaderboardEntry[]",
+        "components": [
+          {
+            "name": "user",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "shares",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "depositedTotal",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "yieldEarned",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "badgesEarned",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "level",
+            "type": "uint8",
+            "internalType": "uint8"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getSaversCount",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "goalsCountOf",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "harvest",
+    "inputs": [
+      {
+        "name": "minMusdOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "netUserYield",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "feeTaken",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable"
   },
   {
     "type": "function",
-    "name": "lastAccrual",
+    "name": "isSaver",
+    "inputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "lastHarvestAt",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "lastHarvestYield",
     "inputs": [],
     "outputs": [
       {
@@ -387,6 +853,29 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
+    "name": "onShareTransfer",
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "owner",
     "inputs": [],
     "outputs": [
@@ -413,6 +902,32 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
+    "name": "pendingBtcToSwap",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pendingCollateralGain",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "pendingYield",
     "inputs": [
       {
@@ -426,6 +941,19 @@ export const bastionVaultAbi = [
         "name": "",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "poolFactory",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "stateMutability": "view"
@@ -451,7 +979,7 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
-    "name": "projectedIndex",
+    "name": "protocolFeeBps",
     "inputs": [],
     "outputs": [
       {
@@ -464,7 +992,7 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
-    "name": "ratePerSecond",
+    "name": "realizedApyBps",
     "inputs": [],
     "outputs": [
       {
@@ -490,6 +1018,75 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
+    "name": "redeem",
+    "inputs": [
+      {
+        "name": "shareAmount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "principal",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "yieldPaid",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "router",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IMezoRouter"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "savers",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setActiveGoal",
+    "inputs": [
+      {
+        "name": "goalId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "setPaused",
     "inputs": [
       {
@@ -503,12 +1100,25 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
-    "name": "setRate",
+    "name": "setProtocolFeeBps",
     "inputs": [
       {
-        "name": "ratePerSecond_",
+        "name": "protocolFeeBps_",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setTreasury",
+    "inputs": [
+      {
+        "name": "treasury_",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "outputs": [],
@@ -535,6 +1145,32 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
+    "name": "stabilityPool",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IStabilityPool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "stabilityPoolDeposit",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "totalAssets",
     "inputs": [],
     "outputs": [
@@ -549,6 +1185,32 @@ export const bastionVaultAbi = [
   {
     "type": "function",
     "name": "totalDeposited",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "totalNetYield",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "totalProtocolFees",
     "inputs": [],
     "outputs": [
       {
@@ -587,6 +1249,38 @@ export const bastionVaultAbi = [
   },
   {
     "type": "function",
+    "name": "treasury",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "userLevelOf",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "users",
     "inputs": [
       {
@@ -596,11 +1290,6 @@ export const bastionVaultAbi = [
       }
     ],
     "outputs": [
-      {
-        "name": "shares",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
       {
         "name": "depositedTotal",
         "type": "uint256",
@@ -628,6 +1317,11 @@ export const bastionVaultAbi = [
       },
       {
         "name": "carry",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "goalsCompleted",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -709,6 +1403,19 @@ export const bastionVaultAbi = [
     "stateMutability": "view"
   },
   {
+    "type": "function",
+    "name": "yieldReserve",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
     "type": "event",
     "name": "BadgeEarned",
     "inputs": [
@@ -760,6 +1467,74 @@ export const bastionVaultAbi = [
   },
   {
     "type": "event",
+    "name": "GoalCreated",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "goalId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "targetAmount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "deadline",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "GoalProgressUpdated",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "goalId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "savedAmount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "tier",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "uint8"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "OwnershipTransferred",
     "inputs": [
       {
@@ -779,13 +1554,76 @@ export const bastionVaultAbi = [
   },
   {
     "type": "event",
-    "name": "RateUpdated",
+    "name": "PausedSet",
     "inputs": [
       {
-        "name": "ratePerSecond",
+        "name": "paused",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ProtocolFeeUpdated",
+    "inputs": [
+      {
+        "name": "protocolFeeBps",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SavingsDeposited",
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "goalId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "shares",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TreasuryUpdated",
+    "inputs": [
+      {
+        "name": "previousTreasury",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "newTreasury",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
       }
     ],
     "anonymous": false
@@ -842,16 +1680,34 @@ export const bastionVaultAbi = [
   },
   {
     "type": "event",
-    "name": "YieldFunded",
+    "name": "YieldHarvested",
     "inputs": [
       {
-        "name": "funder",
+        "name": "caller",
         "type": "address",
         "indexed": true,
         "internalType": "address"
       },
       {
-        "name": "amount",
+        "name": "grossYield",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "netUserYield",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolFee",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "accruedPerShare",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -861,7 +1717,17 @@ export const bastionVaultAbi = [
   },
   {
     "type": "error",
+    "name": "FeeTooHigh",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "InsufficientShares",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidGoal",
     "inputs": []
   },
   {
@@ -871,7 +1737,22 @@ export const bastionVaultAbi = [
   },
   {
     "type": "error",
+    "name": "NotReceipt",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OnlyStabilityPool",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "Reentrancy",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "TransferFailed",
     "inputs": []
   },
   {
@@ -889,18 +1770,12 @@ export const bastionVaultAbi = [
     "name": "ZeroAmount",
     "inputs": []
   }
-] as const
+] as const;
 
 export const bastionReceiptAbi = [
   {
     "type": "constructor",
-    "inputs": [
-      {
-        "name": "vault_",
-        "type": "address",
-        "internalType": "address"
-      }
-    ],
+    "inputs": [],
     "stateMutability": "nonpayable"
   },
   {
@@ -1003,6 +1878,19 @@ export const bastionReceiptAbi = [
   },
   {
     "type": "function",
+    "name": "deployer",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "mint",
     "inputs": [
       {
@@ -1031,6 +1919,19 @@ export const bastionReceiptAbi = [
       }
     ],
     "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setVault",
+    "inputs": [
+      {
+        "name": "vault_",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
   },
   {
     "type": "function",
@@ -1174,18 +2075,12 @@ export const bastionReceiptAbi = [
     ],
     "anonymous": false
   }
-] as const
+] as const;
 
 export const bastionAchievementsAbi = [
   {
     "type": "constructor",
-    "inputs": [
-      {
-        "name": "vault_",
-        "type": "address",
-        "internalType": "address"
-      }
-    ],
+    "inputs": [],
     "stateMutability": "nonpayable"
   },
   {
@@ -1204,6 +2099,58 @@ export const bastionAchievementsAbi = [
   {
     "type": "function",
     "name": "FIRST_DEPOSIT",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_100_VANGUARD",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_25_BRONZE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_50_SILVER",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "GOAL_75_GOLD",
     "inputs": [],
     "outputs": [
       {
@@ -1284,18 +2231,18 @@ export const bastionAchievementsAbi = [
     "name": "approve",
     "inputs": [
       {
-        "name": "to",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "tokenId",
+        "name": "",
         "type": "uint256",
         "internalType": "uint256"
       }
     ],
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "pure"
   },
   {
     "type": "function",
@@ -1315,6 +2262,25 @@ export const bastionAchievementsAbi = [
       }
     ],
     "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "badgeIdByTokenId",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
   },
   {
     "type": "function",
@@ -1350,6 +2316,19 @@ export const bastionAchievementsAbi = [
         "name": "",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "deployer",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "stateMutability": "view"
@@ -1476,40 +2455,40 @@ export const bastionAchievementsAbi = [
     "name": "safeTransferFrom",
     "inputs": [
       {
-        "name": "from",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "to",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "tokenId",
+        "name": "",
         "type": "uint256",
         "internalType": "uint256"
       }
     ],
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "pure"
   },
   {
     "type": "function",
     "name": "safeTransferFrom",
     "inputs": [
       {
-        "name": "from",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "to",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "tokenId",
+        "name": "",
         "type": "uint256",
         "internalType": "uint256"
       },
@@ -1520,21 +2499,34 @@ export const bastionAchievementsAbi = [
       }
     ],
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "pure"
   },
   {
     "type": "function",
     "name": "setApprovalForAll",
     "inputs": [
       {
-        "name": "operator",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "approved",
+        "name": "",
         "type": "bool",
         "internalType": "bool"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "setVault",
+    "inputs": [
+      {
+        "name": "vault_",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "outputs": [],
@@ -1633,23 +2625,23 @@ export const bastionAchievementsAbi = [
     "name": "transferFrom",
     "inputs": [
       {
-        "name": "from",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "to",
+        "name": "",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "tokenId",
+        "name": "",
         "type": "uint256",
         "internalType": "uint256"
       }
     ],
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "pure"
   },
   {
     "type": "function",
@@ -1764,4 +2756,4 @@ export const bastionAchievementsAbi = [
     ],
     "anonymous": false
   }
-] as const
+] as const;
