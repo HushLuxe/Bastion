@@ -37,21 +37,21 @@
     <text x="0" y="392" font-family="Instrument Serif, Georgia, serif" font-size="86" font-style="italic" fill="#1F5F52">Earn the badges.</text>
 
     <text x="0" y="452" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24" fill="#5C6672">Gamified MUSD savings on Mezo — deposit, earn yield every second,</text>
-    <text x="0" y="490" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24" fill="#5C6672">and unlock six on-chain achievement milestones.</text>
+    <text x="0" y="490" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24" fill="#5C6672">routed into Mezo Stability Pool with ten soulbound milestone NFTs.</text>
 
     <g transform="translate(0 534)">
       <rect width="212" height="44" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
       <text x="106" y="28" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="1.6" fill="#1F5F52">MEZO TESTNET 31611</text>
 
       <rect x="228" width="168" height="44" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
-      <text x="312" y="28" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="1.6" fill="#1F5F52">SETTLED IN MUSD</text>
+      <text x="312" y="28" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="1.6" fill="#1F5F52">STABILITY POOL L3+</text>
 
       <rect x="412" width="196" height="44" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
       <text x="510" y="28" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="1.6" fill="#1F5F52">ERC-721 BADGES</text>
     </g>
 
     <text x="0" y="650" font-family="IBM Plex Mono, monospace" font-size="18" fill="#5C6672">bastion-two-hazel.vercel.app</text>
-    <text x="0" y="684" font-family="IBM Plex Mono, monospace" font-size="17" fill="#8B93A0">0xcdf6add60726fb123c26e668e6d4eef06c2c167b</text>
-    <text x="0" y="718" font-family="IBM Plex Mono, monospace" font-size="17" fill="#8B93A0">github.com/Ryjen1/Bastion</text>
+    <text x="0" y="684" font-family="IBM Plex Mono, monospace" font-size="17" fill="#8B93A0">0x2fB1b2C30fF925b2A544777981c8562A05763d0e</text>
+    <text x="0" y="718" font-family="IBM Plex Mono, monospace" font-size="17" fill="#8B93A0">github.com/HushLuxe/Bastion</text>
   </g>
 </svg>

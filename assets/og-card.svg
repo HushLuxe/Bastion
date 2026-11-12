@@ -28,8 +28,8 @@
     <text x="0" y="226" font-family="Instrument Serif, Georgia, serif" font-size="62" fill="#15191E">Fortify your MUSD.</text>
     <text x="0" y="294" font-family="Instrument Serif, Georgia, serif" font-size="62" font-style="italic" fill="#1F5F52">Earn the badges.</text>
 
-    <text x="0" y="352" font-family="IBM Plex Sans, Arial, sans-serif" font-size="20" fill="#5C6672">Gamified MUSD savings on Mezo — deposit, earn yield every second,</text>
-    <text x="0" y="382" font-family="IBM Plex Sans, Arial, sans-serif" font-size="20" fill="#5C6672">and unlock six on-chain achievement milestones.</text>
+    <text x="0" y="352" font-family="IBM Plex Sans, Arial, sans-serif" font-size="20" fill="#5C6672">Gamified MUSD savings on Mezo — route to Stability Pool,</text>
+    <text x="0" y="382" font-family="IBM Plex Sans, Arial, sans-serif" font-size="20" fill="#5C6672">track goals &amp; mint ten soulbound achievement NFTs.</text>
 
     <g transform="translate(0 418)">
       <rect width="186" height="40" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
@@ -37,9 +37,9 @@
       <rect x="202" width="132" height="40" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
       <text x="268" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="1.4" fill="#1F5F52">MUSD</text>
       <rect x="350" width="178" height="40" fill="#F4F1EA" stroke="#15191E" stroke-opacity="0.35" />
-      <text x="439" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="1.4" fill="#1F5F52">ERC-721 BADGES</text>
+      <text x="439" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="1.4" fill="#1F5F52">SOULBOUND</text>
     </g>
 
-    <text x="0" y="540" font-family="IBM Plex Mono, monospace" font-size="15" fill="#5C6672">bastion-two-hazel.vercel.app · github.com/Ryjen1/Bastion</text>
+    <text x="0" y="540" font-family="IBM Plex Mono, monospace" font-size="15" fill="#5C6672">bastion-two-hazel.vercel.app · github.com/HushLuxe/Bastion</text>
   </g>
 </svg>
