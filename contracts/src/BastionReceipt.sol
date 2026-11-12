@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.28;
 
-/// @notice Minimal ERC-20 implementation used for the Bastion receipt token.
-/// @dev    The receipt is a plain claim on the vault's MUSD. It is minted 1:1 on
-///         deposit and burned on withdrawal; the vault is the only privileged caller.
+import {IBastionShareHook} from "./interfaces/IMezo.sol";
+
+/// @notice Minimal ERC-20 implementation used for the Bastion receipt token (bMUSD).
+/// @dev    The receipt is a transferable claim on the vault's MUSD position. It is
+///         minted 1:1 on deposit and burned on withdrawal or redemption. Transfers
+///         checkpoint yield carry in the vault so transferred bMUSD remains fully
+///         redeemable (including its accrued yield from the transfer timestamp).
 contract BastionReceipt {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -16,14 +20,21 @@ contract BastionReceipt {
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
 
-    address public immutable vault;
+    address public immutable deployer;
+    address public vault;
 
     modifier onlyVault() {
         require(msg.sender == vault, "BastionReceipt: caller is not the vault");
         _;
     }
 
-    constructor(address vault_) {
+    constructor() {
+        deployer = msg.sender;
+    }
+
+    function setVault(address vault_) external {
+        require(msg.sender == deployer, "BastionReceipt: not deployer");
+        require(vault == address(0), "BastionReceipt: vault already set");
         require(vault_ != address(0), "BastionReceipt: zero vault");
         vault = vault_;
     }
@@ -50,6 +61,7 @@ contract BastionReceipt {
     }
 
     function mint(address to, uint256 value) external onlyVault {
+        require(to != address(0), "BastionReceipt: zero recipient");
         totalSupply += value;
         balanceOf[to] += value;
         emit Transfer(address(0), to, value);
@@ -63,7 +75,11 @@ contract BastionReceipt {
     }
 
     function _transfer(address from, address to, uint256 value) internal {
+        require(to != address(0), "BastionReceipt: zero recipient");
         require(balanceOf[from] >= value, "BastionReceipt: transfer exceeds balance");
+
+        IBastionShareHook(vault).onShareTransfer(from, to, value);
+
         unchecked {
             balanceOf[from] -= value;
             balanceOf[to] += value;

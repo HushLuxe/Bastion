@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.28;
 
-/// @notice Minimal ERC-721 implementation for Bastion achievement badges.
-/// @dev    Artwork is generated on-chain: `tokenURI` returns a data URI holding the
-///         badge SVG, so the gallery needs no hosting and no IPFS.
+/// @notice Soulbound ERC-721 achievement badges for Bastion savers.
+/// @dev    Artwork is generated 100% on-chain: `tokenURI` returns a Base64 SVG data URI,
+///         so the gallery needs no hosting and no IPFS. Badges are soulbound (non-transferable
+///         after mint) and tied to savings milestones and goal tier levels (Bronze -> Vanguard).
 contract BastionAchievements {
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
@@ -13,8 +14,9 @@ contract BastionAchievements {
     string public constant name = "Bastion Achievements";
     string public constant symbol = "BSTN";
 
-    uint256 public constant BADGE_COUNT = 6;
+    uint256 public constant BADGE_COUNT = 10;
 
+    // Core milestone badges (0-5)
     uint8 public constant FIRST_DEPOSIT = 0;
     uint8 public constant SAVED_100 = 1;
     uint8 public constant SAVED_500 = 2;
@@ -22,7 +24,14 @@ contract BastionAchievements {
     uint8 public constant HELD_30_DAYS = 4;
     uint8 public constant YIELD_10 = 5;
 
-    address public immutable vault;
+    // Goal tier level badges (6-9): Bronze 25%, Silver 50%, Gold 75%, Vanguard 100%
+    uint8 public constant GOAL_25_BRONZE = 6;
+    uint8 public constant GOAL_50_SILVER = 7;
+    uint8 public constant GOAL_75_GOLD = 8;
+    uint8 public constant GOAL_100_VANGUARD = 9;
+
+    address public immutable deployer;
+    address public vault;
 
     uint256 private _nextTokenId = 1;
     mapping(uint256 => address) private _ownerOf;
@@ -36,17 +45,26 @@ contract BastionAchievements {
     /// @notice holder => badgeId => token id minted for that badge.
     mapping(address => mapping(uint8 => uint256)) public tokenIdByBadge;
 
+    /// @notice tokenId => badgeId for O(1) lookup in tokenURI.
+    mapping(uint256 => uint8) public badgeIdByTokenId;
+
     modifier onlyVault() {
         require(msg.sender == vault, "BastionAchievements: caller is not the vault");
         _;
     }
 
-    constructor(address vault_) {
+    constructor() {
+        deployer = msg.sender;
+    }
+
+    function setVault(address vault_) external {
+        require(msg.sender == deployer, "BastionAchievements: not deployer");
+        require(vault == address(0), "BastionAchievements: vault already set");
         require(vault_ != address(0), "BastionAchievements: zero vault");
         vault = vault_;
     }
 
-    // ────────────────────────── ERC-721 ──────────────────────────
+    // ────────────────────────── ERC-721 (Soulbound) ──────────────────────────
 
     function balanceOf(address account) external view returns (uint256) {
         require(account != address(0), "BastionAchievements: zero address");
@@ -59,11 +77,8 @@ contract BastionAchievements {
         return owner;
     }
 
-    function approve(address to, uint256 tokenId) external {
-        address owner = ownerOf(tokenId);
-        require(msg.sender == owner || _operatorApprovals[owner][msg.sender], "BastionAchievements: not approved");
-        _tokenApprovals[tokenId] = to;
-        emit Approval(owner, to, tokenId);
+    function approve(address, uint256) external pure {
+        revert("BastionAchievements: soulbound");
     }
 
     function getApproved(uint256 tokenId) external view returns (address) {
@@ -71,34 +86,24 @@ contract BastionAchievements {
         return _tokenApprovals[tokenId];
     }
 
-    function setApprovalForAll(address operator, bool approved) external {
-        require(operator != msg.sender, "BastionAchievements: approve to caller");
-        _operatorApprovals[msg.sender][operator] = approved;
-        emit ApprovalForAll(msg.sender, operator, approved);
+    function setApprovalForAll(address, bool) external pure {
+        revert("BastionAchievements: soulbound");
     }
 
     function isApprovedForAll(address owner, address operator) external view returns (bool) {
         return _operatorApprovals[owner][operator];
     }
 
-    function transferFrom(address from, address to, uint256 tokenId) public {
-        require(ownerOf(tokenId) == from, "BastionAchievements: wrong owner");
-        require(
-            msg.sender == from || _tokenApprovals[tokenId] == msg.sender || _operatorApprovals[from][msg.sender],
-            "BastionAchievements: not approved"
-        );
-        _tokenApprovals[tokenId] = address(0);
-        _transfer(from, to, tokenId);
+    function transferFrom(address, address, uint256) public pure {
+        revert("BastionAchievements: soulbound");
     }
 
-    function safeTransferFrom(address from, address to, uint256 tokenId) external {
-        _safeTransfer(from, to, tokenId);
+    function safeTransferFrom(address, address, uint256) external pure {
+        revert("BastionAchievements: soulbound");
     }
 
-    /// @dev    Wave 1 does not implement the ERC721Receiver callback: badges are
-    ///         non-interactive collectibles, so transfers stay plain.
-    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory) external {
-        _safeTransfer(from, to, tokenId);
+    function safeTransferFrom(address, address, uint256, bytes memory) external pure {
+        revert("BastionAchievements: soulbound");
     }
 
     function supportsInterface(bytes4 interfaceId) external pure returns (bool) {
@@ -115,6 +120,10 @@ contract BastionAchievements {
         if (badgeId == HELD_7_DAYS) return "Held for 7 Days";
         if (badgeId == HELD_30_DAYS) return "Held for 30 Days";
         if (badgeId == YIELD_10) return "Earned 10 MUSD in Yield";
+        if (badgeId == GOAL_25_BRONZE) return "Bronze Tier (25%)";
+        if (badgeId == GOAL_50_SILVER) return "Silver Tier (50%)";
+        if (badgeId == GOAL_75_GOLD) return "Gold Tier (75%)";
+        if (badgeId == GOAL_100_VANGUARD) return "Vanguard Tier (100%)";
         return "Unknown";
     }
 
@@ -125,28 +134,23 @@ contract BastionAchievements {
         if (badgeId == SAVED_500) return "Lifetime deposits reached 500 MUSD.";
         if (badgeId == HELD_7_DAYS) return "Your position has been held for seven days.";
         if (badgeId == HELD_30_DAYS) return "Your position has been held for thirty days.";
-        if (badgeId == YIELD_10) return "You have earned 10 MUSD in yield.";
+        if (badgeId == YIELD_10) return "You have earned 10 MUSD in real yield.";
+        if (badgeId == GOAL_25_BRONZE) return "Reached 25% of a savings goal.";
+        if (badgeId == GOAL_50_SILVER) return "Reached 50% of a savings goal.";
+        if (badgeId == GOAL_75_GOLD) return "Reached 75% of a savings goal.";
+        if (badgeId == GOAL_100_VANGUARD) return "Completed 100% of a savings goal.";
         return "";
     }
 
     /// @notice Metadata URI for a badge. Artwork is generated on-chain as an SVG
     ///         data URI, so the gallery needs no hosting and no IPFS.
     function tokenURI(uint256 tokenId) external view returns (string memory) {
-        address holder = ownerOf(tokenId);
-        uint8 badgeId = _badgeIdOf(holder, tokenId);
+        ownerOf(tokenId);
+        uint8 badgeId = badgeIdByTokenId[tokenId];
         string memory svg = _badgeSvg(badgeId, badgeName(badgeId), badgeDescription(badgeId));
         return string.concat("data:image/svg+xml;base64,", _base64(svg));
     }
 
-    function _badgeIdOf(address holder, uint256 tokenId) internal view returns (uint8) {
-        for (uint8 i = 0; i < 6; i++) {
-            if (tokenIdByBadge[holder][i] == tokenId) return i;
-        }
-        return 0;
-    }
-
-    /// @dev Builds the badge artwork: a technical drawing sheet with a medallion.
-    ///      Each milestone gets its own linework, drawn from the same primitives.
     function _badgeSvg(uint8 badgeId, string memory name_, string memory description_)
         internal
         pure
@@ -173,10 +177,11 @@ contract BastionAchievements {
             '">',
             _badgeNumber(badgeId),
             "</text>",
-            '<text x="256" y="424" text-anchor="middle" font-family="Georgia, serif" font-size="38" font-weight="700" fill="#15191E">',
+            '<text x="464" y="68" text-anchor="end" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#5C6672">SOULBOUND</text>',
+            '<text x="256" y="424" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="700" fill="#15191E">',
             name_,
             "</text>",
-            '<text x="256" y="458" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#5C6672">',
+            '<text x="256" y="458" text-anchor="middle" font-family="Courier New, monospace" font-size="15" fill="#5C6672">',
             description_,
             "</text>",
             "</svg>"
@@ -189,7 +194,11 @@ contract BastionAchievements {
         if (badgeId == 2) return "03";
         if (badgeId == 3) return "04";
         if (badgeId == 4) return "05";
-        return "06";
+        if (badgeId == 5) return "06";
+        if (badgeId == 6) return "07";
+        if (badgeId == 7) return "08";
+        if (badgeId == 8) return "09";
+        return "10";
     }
 
     function _accent(uint8 badgeId) internal pure returns (string memory) {
@@ -198,13 +207,15 @@ contract BastionAchievements {
         if (badgeId == 2) return "#16463D";
         if (badgeId == 3) return "#397F6E";
         if (badgeId == 4) return "#123A33";
-        return "#2F8A76";
+        if (badgeId == 5) return "#2F8A76";
+        if (badgeId == 6) return "#8A4B2A"; // Bronze
+        if (badgeId == 7) return "#5C6672"; // Silver
+        if (badgeId == 8) return "#A67C2E"; // Gold
+        return "#1F5F52"; // Vanguard
     }
 
-    /// @dev Linework for each milestone, drawn as a technical elevation.
     function _glyph(uint8 badgeId, string memory accent) internal pure returns (string memory) {
         if (badgeId == 0) {
-            // an opened vault door
             return string.concat(
                 '<path d="M180 300v-90a76 76 0 0 1 152 0v90" fill="none" stroke="#15191E" stroke-width="10"/>',
                 '<path d="M168 300h176" stroke="',
@@ -214,7 +225,6 @@ contract BastionAchievements {
             );
         }
         if (badgeId == 1) {
-            // stacked ingots
             return string.concat(
                 '<rect x="176" y="272" width="160" height="34" rx="3" fill="none" stroke="#15191E" stroke-width="8"/>',
                 '<rect x="192" y="232" width="128" height="32" rx="3" fill="none" stroke="',
@@ -224,7 +234,6 @@ contract BastionAchievements {
             );
         }
         if (badgeId == 2) {
-            // a keep with battlements
             return string.concat(
                 '<path d="M170 302V196h30v22h20v-22h20v22h20v-22h20v22h30v106z" fill="none" stroke="#15191E" stroke-width="8" stroke-linejoin="round"/>',
                 '<rect x="228" y="252" width="56" height="50" fill="',
@@ -233,7 +242,6 @@ contract BastionAchievements {
             );
         }
         if (badgeId == 3) {
-            // hourglass
             return string.concat(
                 '<path d="M190 168h132l-66 74z" fill="none" stroke="#15191E" stroke-width="8" stroke-linejoin="round"/>',
                 '<path d="M322 168l-66 74v62l66 68H190l66-68v-62z" fill="none" stroke="',
@@ -242,7 +250,6 @@ contract BastionAchievements {
             );
         }
         if (badgeId == 4) {
-            // calendar with 30
             return string.concat(
                 '<rect x="168" y="164" width="176" height="150" fill="none" stroke="#15191E" stroke-width="8"/>',
                 '<path d="M168 214h176" stroke="#15191E" stroke-width="8"/>',
@@ -254,20 +261,66 @@ contract BastionAchievements {
                 '">30</text>'
             );
         }
-        // coin with a sprouting shoot
+        if (badgeId == 5) {
+            return string.concat(
+                '<circle cx="256" cy="250" r="74" fill="none" stroke="#15191E" stroke-width="8"/>',
+                '<path d="M256 292v-52" stroke="',
+                accent,
+                '" stroke-width="8" stroke-linecap="round"/>',
+                '<path d="M256 250c0-26 20-42 46-42-2 28-18 42-46 42z" fill="',
+                accent,
+                '"/>',
+                '<path d="M256 272c0-22-16-34-38-34 2 22 16 34 38 34z" fill="none" stroke="#15191E" stroke-width="7"/>'
+            );
+        }
+        if (badgeId == 6) {
+            // Bronze 25% — quarter shield
+            return string.concat(
+                '<path d="M256 164l76 32v56c0 46-32 76-76 92-44-16-76-46-76-92v-56z" fill="none" stroke="#15191E" stroke-width="8"/>',
+                '<path d="M256 164v92h76" fill="none" stroke="',
+                accent,
+                '" stroke-width="8"/>',
+                '<text x="256" y="305" text-anchor="middle" font-family="Courier New, monospace" font-size="28" font-weight="700" fill="',
+                accent,
+                '">25%</text>'
+            );
+        }
+        if (badgeId == 7) {
+            // Silver 50% — half shield
+            return string.concat(
+                '<path d="M256 164l76 32v56c0 46-32 76-76 92-44-16-76-46-76-92v-56z" fill="none" stroke="#15191E" stroke-width="8"/>',
+                '<path d="M180 248h152" stroke="',
+                accent,
+                '" stroke-width="8"/>',
+                '<text x="256" y="305" text-anchor="middle" font-family="Courier New, monospace" font-size="28" font-weight="700" fill="',
+                accent,
+                '">50%</text>'
+            );
+        }
+        if (badgeId == 8) {
+            // Gold 75% — three-quarter chevron crest
+            return string.concat(
+                '<path d="M256 164l76 32v56c0 46-32 76-76 92-44-16-76-46-76-92v-56z" fill="none" stroke="#15191E" stroke-width="8"/>',
+                '<path d="M204 228l52-26 52 26M204 260l52-26 52 26" fill="none" stroke="',
+                accent,
+                '" stroke-width="7"/>',
+                '<text x="256" y="308" text-anchor="middle" font-family="Courier New, monospace" font-size="28" font-weight="700" fill="',
+                accent,
+                '">75%</text>'
+            );
+        }
+        // Vanguard 100% — crowned bastion citadel
         return string.concat(
-            '<circle cx="256" cy="250" r="74" fill="none" stroke="#15191E" stroke-width="8"/>',
-            '<path d="M256 292v-52" stroke="',
+            '<path d="M180 288V198l38 24 38-46 38 46 38-24v90z" fill="none" stroke="#15191E" stroke-width="8" stroke-linejoin="round"/>',
+            '<path d="M170 306h172" stroke="',
             accent,
-            '" stroke-width="8" stroke-linecap="round"/>',
-            '<path d="M256 250c0-26 20-42 46-42-2 28-18 42-46 42z" fill="',
+            '" stroke-width="10" stroke-linecap="round"/>',
+            '<circle cx="256" cy="248" r="16" fill="',
             accent,
-            '"/>',
-            '<path d="M256 272c0-22-16-34-38-34 2 22 16 34 38 34z" fill="none" stroke="#15191E" stroke-width="7"/>'
+            '"/>'
         );
     }
 
-    /// @dev Standard base64 encoder so the SVG can be served as a data URI.
     function _base64(string memory data) internal pure returns (string memory) {
         bytes memory table = bytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
         bytes memory input = bytes(data);
@@ -289,7 +342,7 @@ contract BastionAchievements {
 
     // ────────────────────────── Bastion ──────────────────────────
 
-    /// @notice Mints a badge to `holder`. One badge per holder per badge type.
+    /// @notice Mints a soulbound badge to `holder`. One badge per holder per badge type.
     function mintBadge(address holder, uint8 badgeId) external onlyVault {
         require(holder != address(0), "BastionAchievements: zero holder");
         require(badgeId < BADGE_COUNT, "BastionAchievements: unknown badge");
@@ -301,6 +354,7 @@ contract BastionAchievements {
         _ownerOf[tokenId] = holder;
         _balanceOf[holder] += 1;
         tokenIdByBadge[holder][badgeId] = tokenId;
+        badgeIdByTokenId[tokenId] = badgeId;
 
         emit Transfer(address(0), holder, tokenId);
         emit BadgeMinted(holder, tokenId, badgeId);
@@ -308,19 +362,5 @@ contract BastionAchievements {
 
     function totalMinted() external view returns (uint256) {
         return _nextTokenId - 1;
-    }
-
-    function _safeTransfer(address from, address to, uint256 tokenId) internal {
-        transferFrom(from, to, tokenId);
-    }
-
-    function _transfer(address from, address to, uint256 tokenId) internal {
-        delete _tokenApprovals[tokenId];
-        unchecked {
-            _balanceOf[from] -= 1;
-            _balanceOf[to] += 1;
-        }
-        _ownerOf[tokenId] = to;
-        emit Transfer(from, to, tokenId);
     }
 }
