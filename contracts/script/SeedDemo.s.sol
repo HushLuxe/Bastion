@@ -6,20 +6,17 @@ import {console} from "forge-std/console.sol";
 import {BastionVault} from "../src/BastionVault.sol";
 import {IERC20} from "../src/IERC20.sol";
 
-/// @notice Prepares a deployed Bastion vault for the demo:
-///         - funds the yield buffer so accrued yield can actually be paid
-///         - sets the demo yield rate
-///         - makes a demo deposit so achievements unlock on camera
+/// @notice Seeds an initial savings goal and MUSD deposit into BastionVault on Mezo Testnet.
 ///
 ///         Usage:
-///           ANNEX_ADDRESS=0x... forge script script/SeedDemo.s.sol --rpc-url $RPC_URL \
+///           BASTION_ADDRESS=0x... forge script script/SeedDemo.s.sol --rpc-url $RPC_URL \
 ///             --private-key $PRIVATE_KEY --broadcast
 contract SeedDemo is Script {
-    function run() external returns (uint256 shares) {
+    function run() external returns (uint256 goalId, uint256 shares) {
         address vaultAddr = vm.envAddress("BASTION_ADDRESS");
-        uint256 bufferAmount = vm.envOr("BUFFER_AMOUNT", uint256(40 ether));
-        uint256 depositAmount = vm.envOr("DEPOSIT_AMOUNT", uint256(120 ether));
-        uint256 rate = vm.envOr("RATE_PER_SECOND", uint256(1e14)); // 0.01% per second
+        uint256 targetAmount = vm.envOr("GOAL_TARGET", uint256(40 ether));
+        uint256 durationDays = vm.envOr("GOAL_DAYS", uint256(30));
+        uint256 depositAmount = vm.envOr("DEPOSIT_AMOUNT", uint256(20 ether));
 
         uint256 pk = vm.envOr("PRIVATE_KEY", uint256(0));
         if (pk != 0) {
@@ -28,27 +25,23 @@ contract SeedDemo is Script {
             vm.startBroadcast();
         }
 
-        BastionVault vault = BastionVault(vaultAddr);
+        BastionVault vault = BastionVault(payable(vaultAddr));
         IERC20 musd = vault.asset();
 
-        // approve the vault for the buffer and the demo deposit
-        musd.approve(vaultAddr, type(uint256).max);
-
-        vault.setRate(rate);
-        vault.fundYield(bufferAmount);
-        shares = vault.deposit(depositAmount);
+        musd.approve(vaultAddr, depositAmount);
+        goalId = vault.createGoal("Bitcoin Reserve", targetAmount, durationDays);
+        shares = vault.depositToGoal(goalId, depositAmount);
 
         vm.stopBroadcast();
 
         console.log("----------------------------------------------------------");
-        console.log("Bastion demo state");
+        console.log("Bastion goal & deposit seeded");
         console.log("----------------------------------------------------------");
-        console.log("Vault        :", vaultAddr);
-        console.log("Buffer funded:", bufferAmount);
-        console.log("Rate / second:", rate);
-        console.log("Deposit      :", depositAmount);
-        console.log("Shares       :", shares);
-        console.log("Badges minted:", vault.achievements().balanceOf(vault.owner()));
+        console.log("Vault           :", vaultAddr);
+        console.log("Goal ID         :", goalId);
+        console.log("Deposit         :", depositAmount);
+        console.log("Shares (bMUSD)  :", shares);
+        console.log("SP Deposit      :", vault.stabilityPoolDeposit());
         console.log("----------------------------------------------------------");
     }
 }
